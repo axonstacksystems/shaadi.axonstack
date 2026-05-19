@@ -26,7 +26,7 @@
 
 function doPost(e) {
   const lock = LockService.getScriptLock();
-  lock.tryLock(10_000);
+  lock.tryLock(10000);
 
   try {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
