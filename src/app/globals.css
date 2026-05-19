@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* Invitation theme tokens — these are the only design tokens this app uses */
+@theme inline {
+  --color-invitation-cream: #faf8f3;
+  --color-invitation-gold: #d4af37;
+  --color-invitation-gold-light: #f4e4b8;
+  --color-invitation-gold-dark: #b8941f;
+  --color-invitation-emerald: #0f5e4a;
+  --color-invitation-emerald-light: #1a8b6a;
+  --color-invitation-emerald-dark: #0a3d30;
+  --color-invitation-ivory: #fffff0;
+  --color-invitation-charcoal: #2c2c2c;
+  --color-invitation-midnight: #0a1628;
+  --color-invitation-midnight-blue: #1a2942;
+  --color-invitation-rose-gold: #b76e79;
+  --color-invitation-pearl: #f5f5f0;
+  --color-invitation-bronze: #cd7f32;
+
+  --font-invitation-serif: var(--font-invitation-serif);
+  --font-invitation-sans: var(--font-invitation-sans);
+  --font-invitation-script: var(--font-invitation-script);
+}
+
+html {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  overscroll-behavior-y: contain;
+}
+
+.invitation-root {
+  font-family: var(--font-invitation-sans), system-ui, sans-serif;
+  color: var(--color-invitation-charcoal);
+  background: var(--color-invitation-cream);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+@layer utilities {
+  .invitation-glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+  }
+
+  .invitation-glass-dark {
+    background: rgba(26, 41, 66, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+  }
+
+  .invitation-gradient-gold {
+    background: linear-gradient(135deg, #d4af37 0%, #f4e4b8 100%);
+  }
+
+  .invitation-gradient-emerald {
+    background: linear-gradient(135deg, #0f5e4a 0%, #1a8b6a 100%);
+  }
+
+  .invitation-gradient-midnight {
+    background: linear-gradient(135deg, #0a1628 0%, #1a2942 100%);
+  }
+
+  .invitation-text-gradient-gold {
+    background: linear-gradient(135deg, #d4af37 0%, #f4e4b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .invitation-shadow-luxury {
+    box-shadow:
+      0 4px 6px -1px rgba(212, 175, 55, 0.1),
+      0 2px 4px -1px rgba(212, 175, 55, 0.06),
+      0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .invitation-shadow-soft {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .invitation-root * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
