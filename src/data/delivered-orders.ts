@@ -83,7 +83,7 @@ export const deliveredOrders: DeliveredOrder[] = [
         },
         timeline: [
             {
-                time: "10:00 AM",
+                time: "11:00 AM",
                 event: "Wedding Ceremony",
                 description: "The sacred union witnessed by family and friends",
             },
