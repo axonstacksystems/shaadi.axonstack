@@ -21,13 +21,27 @@ export async function generateMetadata({
   const order = getDeliveredOrderBySlug(slug);
   if (!order) return { title: "Card Not Found" };
 
+  const url = `https://shaadi.axonstack.in/${order.slug}`;
+  const title = `${order.title} — Wedding Invitation`;
+  const description = `${order.invitationLine}. You're invited to ${order.groom} & ${order.bride}'s ${order.ceremonyHeadline} on ${order.primaryEvent.date} at ${order.primaryEvent.venue}.`;
+
   return {
-    title: `${order.title} — Wedding Invitation`,
-    description: `You're invited to the ${order.ceremonyHeadline} of ${order.title}.`,
+    title,
+    description,
+    alternates: { canonical: url },
     openGraph: {
-      title: `${order.title} — Wedding Invitation`,
-      description: `You're invited to the ${order.ceremonyHeadline} of ${order.title}.`,
       type: "website",
+      locale: "en_US",
+      url,
+      siteName: "Shaadi Cards by AxonStack",
+      title: `${order.title} · Wedding Invitation`,
+      description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${order.title} · Wedding Invitation`,
+      description,
+      creator: "@axonstack",
     },
   };
 }

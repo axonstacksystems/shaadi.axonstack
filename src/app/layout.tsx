@@ -34,12 +34,32 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://shaadi.axonstack.in"),
+  applicationName: "Shaadi Cards by AxonStack",
   title: {
-    default: "Shaadi Cards — Digital Wedding Invitations",
-    template: "%s",
+    default: "Shaadi Cards — Digital Wedding Invitations by AxonStack",
+    template: "%s · Shaadi Cards by AxonStack",
   },
   description:
-    "Delivered digital wedding invitations crafted by AxonStack — Shaadi Cards.",
+    "Premium digital wedding invitations crafted by AxonStack. Cinematic, elegant, mobile-first cards delivered at shaadi.axonstack.in.",
+  authors: [{ name: "AxonStack", url: "https://axonstack.in" }],
+  creator: "AxonStack",
+  publisher: "AxonStack",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://shaadi.axonstack.in",
+    siteName: "Shaadi Cards by AxonStack",
+    title: "Shaadi Cards — Digital Wedding Invitations by AxonStack",
+    description:
+      "Premium digital wedding invitations crafted by AxonStack. Cinematic, elegant, mobile-first cards.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Shaadi Cards — Digital Wedding Invitations by AxonStack",
+    description:
+      "Premium digital wedding invitations crafted by AxonStack.",
+    creator: "@axonstack",
+  },
   robots: { index: true, follow: true },
 };
 
