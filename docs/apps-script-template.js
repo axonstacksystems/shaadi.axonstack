@@ -1,58 +1,35 @@
 /**
- * Shaadi Cards — RSVP collector
+ * Shaadi Cards — RSVP click counter
  *
- * Paste this into a new Google Apps Script project (script.google.com →
- * New project), bind it to a Google Sheet, and deploy as a Web App with
- * "Anyone" access. Then put the resulting Web App URL into the
- * delivered order's `rsvp.webhookUrl` in src/data/delivered-orders.ts.
+ * Records every Yes / No button click into the first sheet.
+ * Columns: Submitted At | Card | Attending
  *
- * --- Setup steps ---
- * 1. Create a Google Sheet. The first sheet's row 1 is reserved for
- *    headers — leave it empty, this script will populate it on first
- *    submission.
- * 2. Tools → Script editor (or Extensions → Apps Script in newer Sheets).
- * 3. Replace the boilerplate with this file.
- * 4. Click Deploy → New deployment → Type: Web app.
+ * Setup:
+ * 1. Open (or create) a Google Sheet.
+ * 2. Extensions → Apps Script → replace boilerplate with this file.
+ * 3. Deploy → New deployment → Web app
  *    - Execute as: Me
  *    - Who has access: Anyone
- * 5. Copy the Web app URL (looks like
- *    https://script.google.com/macros/s/AKfy.../exec).
- * 6. Paste it into delivered-orders.ts → rsvp.webhookUrl, push, deploy.
- *
- * To re-deploy after edits: Deploy → Manage deployments → pencil icon →
- * "New version" → Deploy. Use the SAME deployment URL (do not create a
- * new one each time, the URL changes).
+ * 4. Copy the /exec URL → paste into delivered-orders.ts → rsvp.webhookUrl
  */
 
 function doPost(e) {
-  const lock = LockService.getScriptLock();
+  var lock = LockService.getScriptLock();
   lock.tryLock(10000);
 
   try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
-    const params = (e && e.parameter) || {};
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+    var params = (e && e.parameter) || {};
 
-    // Header row: write once if the sheet is brand new
+    // Write header row once
     if (sheet.getLastRow() === 0) {
-      sheet.appendRow([
-        "Submitted At",
-        "Slug",
-        "Card Title",
-        "Name",
-        "Attending",
-        "Guest Count",
-        "Message",
-      ]);
+      sheet.appendRow(["Submitted At", "Card", "Attending"]);
     }
 
     sheet.appendRow([
       params.submittedAt || new Date().toISOString(),
-      params.slug || "",
-      params.title || "",
-      params.name || "",
+      params.title || params.slug || "",
       params.attending || "",
-      params.guestCount || "",
-      params.message || "",
     ]);
 
     return ContentService.createTextOutput(
@@ -67,8 +44,7 @@ function doPost(e) {
   }
 }
 
-// Sanity check while editing — open the Web app URL in a browser to
-// confirm the deployment is live.
+// Open the Web app URL in a browser to confirm it's live.
 function doGet() {
   return ContentService.createTextOutput(
     "Shaadi Cards RSVP collector is live.",

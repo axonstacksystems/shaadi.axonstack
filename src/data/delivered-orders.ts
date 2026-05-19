@@ -92,17 +92,12 @@ export const deliveredOrders: DeliveredOrder[] = [
                 event: "Wedding Lunch",
                 description: "Traditional Malabar cuisine served",
             },
-            {
-                time: "7:00 PM",
-                event: "Reception",
-                description: "Evening celebration with dinner",
-            },
         ],
         rsvpWhatsApp: "919876543210",
         rsvp: {
             // Paste the Apps Script Web App URL here once published. While
             // empty, the card falls back to WhatsApp buttons.
-            webhookUrl: "https://script.google.com/macros/s/AKfycbxVNNGgzKrB6c1mP1Uj7eWV7w7OOZb7J7bIpvhVD_y_s8ReWuX52EtN-0DS6o6z8Rd_/exec",
+            webhookUrl: "https://script.google.com/macros/s/AKfycbyPVwEqRmffTCFUOInYGFN0tH2Hg-IxV_Nt9RLOTdOinujW-7gPWI-sqZme0WS0AqO1/exec",
             deadline: "20th May 2026",
             maxGuests: 5,
         },
