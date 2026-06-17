@@ -103,19 +103,19 @@ export const deliveredOrders: DeliveredOrder[] = [
         },
     },
     {
-        slug: "abiya-ashik",
+        slug: "ashik-abiya",
         templateSlug: "noor-e-nikah",
-        title: "Abiya & Ashik",
+        title: "Ashik & Abiya",
         deliveredOn: "2026-06-18",
         bride: "Abiya",
         groom: "Ashik",
         invitationLine: "In the name of Allah, with the blessings of our families",
         ceremonyHeadline: "Nikah",
-        eventDateIso: "2026-12-20T18:30:00+05:30",
+        eventDateIso: "2026-07-19T10:00:00+05:30",
         primaryEvent: {
             label: "NIKAH CEREMONY",
-            date: "Sunday, 20th December 2026",
-            time: "After Maghrib",
+            date: "Sunday, 19th July 2026",
+            time: "10:00 AM",
             venue: "Juma Masjid",
             venueAddress: "Mananchira, Calicut, Kerala 673001",
             mapsUrl:
@@ -123,12 +123,12 @@ export const deliveredOrders: DeliveredOrder[] = [
         },
         timeline: [
             {
-                time: "After Maghrib",
+                time: "10:00 AM",
                 event: "Nikah Ceremony",
                 description: "The sacred union witnessed by family and friends",
             },
             {
-                time: "7:00 PM",
+                time: "12:00 PM",
                 event: "Walima Reception",
                 description: "Dinner and celebration with loved ones",
             },
@@ -136,7 +136,7 @@ export const deliveredOrders: DeliveredOrder[] = [
         rsvpWhatsApp: "919876543210",
         rsvp: {
             webhookUrl: "",
-            deadline: "15th December 2026",
+            deadline: "15th July 2026",
             maxGuests: 5,
         },
     },
