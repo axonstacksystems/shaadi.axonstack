@@ -117,9 +117,11 @@ export const deliveredOrders: DeliveredOrder[] = [
             date: "Sunday, 19th July 2026",
             time: "10:00 AM",
             venue: "Juma Masjid",
-            venueAddress: "Mananchira, Calicut, Kerala 673001",
+            venueAddress: "Ayikkarapadi, Malappuram, Kerala",
+            lat: 11.1722,
+            lng: 75.8981,
             mapsUrl:
-                "https://www.google.com/maps/search/?api=1&query=Juma+Masjid+Calicut",
+                "https://www.google.com/maps/search/?api=1&query=Juma+Masjid+Ayikkarapadi+Malappuram",
         },
         timeline: [
             {
@@ -129,7 +131,7 @@ export const deliveredOrders: DeliveredOrder[] = [
             },
             {
                 time: "12:00 PM",
-                event: "Walima Reception",
+                event: "Reception",
                 description: "Dinner and celebration with loved ones",
             },
         ],

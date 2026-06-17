@@ -62,10 +62,10 @@ export function NoorENikahCard({ order }: Props) {
   };
 
   const yesMsg = encodeURIComponent(
-    `Alhamdulillah, I will attend the Nikah of ${order.bride} & ${order.groom}.`,
+    `Alhamdulillah, I will attend the Nikah of ${order.groom} & ${order.bride}.`,
   );
   const noMsg = encodeURIComponent(
-    `With regret, I am unable to attend the Nikah ceremony of ${order.bride} & ${order.groom}.`,
+    `With regret, I am unable to attend the Nikah ceremony of ${order.groom} & ${order.bride}.`,
   );
 
   const brideInitial = order.bride.split(" ")[0][0];
@@ -106,7 +106,7 @@ export function NoorENikahCard({ order }: Props) {
             <div className="flex h-full flex-col items-center justify-center pt-6">
               <Khatam className="mb-3 h-8 w-8" gradientId="curtain-star" />
               <div className="invitation-gold-leaf font-[family-name:var(--font-invitation-serif)] text-4xl font-bold">
-                {brideInitial} &amp; {groomInitial}
+                {groomInitial} &amp; {brideInitial}
               </div>
             </div>
           </MihrabFrame>
@@ -115,7 +115,7 @@ export function NoorENikahCard({ order }: Props) {
             The Nikah of
           </p>
           <p className="mb-8 font-[family-name:var(--font-invitation-serif)] text-2xl font-bold text-[#2c2c2c]">
-            {order.bride} &amp; {order.groom}
+            {order.groom} &amp; {order.bride}
           </p>
 
           <button
@@ -168,7 +168,7 @@ export function NoorENikahCard({ order }: Props) {
                 className="block"
                 style={{ fontSize: "clamp(2rem, 8vw, 4rem)" }}
               >
-                {order.bride}
+                {order.groom}
               </span>
               <span className="my-2 block font-[family-name:var(--font-invitation-script)] text-4xl text-[#b76e79]">
                 &amp;
@@ -177,13 +177,13 @@ export function NoorENikahCard({ order }: Props) {
                 className="block"
                 style={{ fontSize: "clamp(2rem, 8vw, 4rem)" }}
               >
-                {order.groom}
+                {order.bride}
               </span>
             </h1>
           </MihrabFrame>
 
           <p className="mb-12 font-[family-name:var(--font-invitation-sans)] text-lg text-[#2c2c2c]/80">
-            …request the honour of your presence at their {order.ceremonyHeadline}
+            We request the honour of your presence at our {order.ceremonyHeadline}
           </p>
 
           {/* Ceremony glass card */}
@@ -272,19 +272,6 @@ export function NoorENikahCard({ order }: Props) {
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <div className="invitation-shadow-soft rounded-2xl border border-[#d4af37]/20 p-8 text-center">
               <p className="mb-3 text-xs font-semibold tracking-[0.25em] text-[#d4af37]">
-                THE BRIDE
-              </p>
-              <h3 className="font-[family-name:var(--font-invitation-serif)] text-2xl font-bold text-[#2c2c2c]">
-                {order.bride}
-              </h3>
-              <p className="mt-3 text-[#2c2c2c]/70">
-                With love and blessings
-                <br />
-                from her family
-              </p>
-            </div>
-            <div className="invitation-shadow-soft rounded-2xl border border-[#d4af37]/20 p-8 text-center">
-              <p className="mb-3 text-xs font-semibold tracking-[0.25em] text-[#d4af37]">
                 THE GROOM
               </p>
               <h3 className="font-[family-name:var(--font-invitation-serif)] text-2xl font-bold text-[#2c2c2c]">
@@ -294,6 +281,19 @@ export function NoorENikahCard({ order }: Props) {
                 With love and blessings
                 <br />
                 from his family
+              </p>
+            </div>
+            <div className="invitation-shadow-soft rounded-2xl border border-[#d4af37]/20 p-8 text-center">
+              <p className="mb-3 text-xs font-semibold tracking-[0.25em] text-[#d4af37]">
+                THE BRIDE
+              </p>
+              <h3 className="font-[family-name:var(--font-invitation-serif)] text-2xl font-bold text-[#2c2c2c]">
+                {order.bride}
+              </h3>
+              <p className="mt-3 text-[#2c2c2c]/70">
+                With love and blessings
+                <br />
+                from her family
               </p>
             </div>
           </div>
@@ -440,7 +440,7 @@ export function NoorENikahCard({ order }: Props) {
             With duas and love,
           </p>
           <p className="mt-2 font-[family-name:var(--font-invitation-serif)] text-lg font-bold text-[#f4e4b8]">
-            The families of {order.bride} &amp; {order.groom}
+            The families of {order.groom} &amp; {order.bride}
           </p>
         </div>
       </section>
@@ -456,7 +456,7 @@ export function NoorENikahCard({ order }: Props) {
             href="https://axonstack.in/apps/shaadi-cards"
             className="hover:text-[#2c2c2c]/60 transition-colors"
           >
-            AxonStack — Shaadi Cards
+            AXONSTACK — Shaadi Cards
           </a>
         </p>
       </footer>
