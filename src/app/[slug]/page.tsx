@@ -5,6 +5,7 @@ import {
   getDeliveredOrderBySlug,
 } from "@/data/delivered-orders";
 import { MalabarEmeraldCard } from "@/components/cards/MalabarEmeraldCard";
+import { NoorENikahCard } from "@/components/cards/NoorENikahCard";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -54,6 +55,8 @@ export default async function DeliveredCardPage({ params }: Props) {
   switch (order.templateSlug) {
     case "malabar-emerald":
       return <MalabarEmeraldCard order={order} />;
+    case "noor-e-nikah":
+      return <NoorENikahCard order={order} />;
     // Future: kerala-ivory, midnight-nikah, etc.
     default:
       notFound();

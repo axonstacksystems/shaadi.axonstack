@@ -89,6 +89,32 @@ body {
   .invitation-shadow-soft {
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
   }
+
+  .invitation-arabic {
+    font-family: var(--font-invitation-arabic), "Scheherazade New",
+      "Noto Naskh Arabic", serif;
+    line-height: 2;
+    direction: rtl;
+  }
+
+  .invitation-gold-leaf {
+    background: linear-gradient(
+      135deg,
+      #b8941f 0%,
+      #d4af37 35%,
+      #f4e4b8 50%,
+      #d4af37 65%,
+      #b8941f 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .invitation-paper-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

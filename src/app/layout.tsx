@@ -3,6 +3,7 @@ import {
   Playfair_Display,
   Inter,
   Cormorant_Garamond,
+  Noto_Naskh_Arabic,
 } from "next/font/google";
 import "./globals.css";
 
@@ -22,6 +23,13 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-invitation-script",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const arabic = Noto_Naskh_Arabic({
+  variable: "--font-invitation-arabic",
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -71,7 +79,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} ${cormorant.variable}`}
+      className={`${playfair.variable} ${inter.variable} ${cormorant.variable} ${arabic.variable}`}
     >
       <head>
         <link

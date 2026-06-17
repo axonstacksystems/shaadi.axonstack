@@ -102,6 +102,44 @@ export const deliveredOrders: DeliveredOrder[] = [
             maxGuests: 5,
         },
     },
+    {
+        slug: "abiya-ashik",
+        templateSlug: "noor-e-nikah",
+        title: "Abiya & Ashik",
+        deliveredOn: "2026-06-18",
+        bride: "Abiya",
+        groom: "Ashik",
+        invitationLine: "In the name of Allah, with the blessings of our families",
+        ceremonyHeadline: "Nikah",
+        eventDateIso: "2026-12-20T18:30:00+05:30",
+        primaryEvent: {
+            label: "NIKAH CEREMONY",
+            date: "Sunday, 20th December 2026",
+            time: "After Maghrib",
+            venue: "Juma Masjid",
+            venueAddress: "Mananchira, Calicut, Kerala 673001",
+            mapsUrl:
+                "https://www.google.com/maps/search/?api=1&query=Juma+Masjid+Calicut",
+        },
+        timeline: [
+            {
+                time: "After Maghrib",
+                event: "Nikah Ceremony",
+                description: "The sacred union witnessed by family and friends",
+            },
+            {
+                time: "7:00 PM",
+                event: "Walima Reception",
+                description: "Dinner and celebration with loved ones",
+            },
+        ],
+        rsvpWhatsApp: "919876543210",
+        rsvp: {
+            webhookUrl: "",
+            deadline: "15th December 2026",
+            maxGuests: 5,
+        },
+    },
 ];
 
 export function getDeliveredOrderBySlug(
