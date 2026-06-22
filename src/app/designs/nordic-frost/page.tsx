@@ -34,7 +34,7 @@ const demoOrder = {
     { time: "3:00 PM", event: "Nikah Ceremony", description: "The sacred union witnessed by family and friends" },
     { time: "5:00 PM", event: "Walima Reception", description: "The marriage feast, in keeping with the Sunnah" },
   ],
-  rsvpWhatsApp: "919876543210",
+  rsvpWhatsApp: "918985798572",
   rsvp: {
     webhookUrl: "",
     deadline: "15th December 2026",

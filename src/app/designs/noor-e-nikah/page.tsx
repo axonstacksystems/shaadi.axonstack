@@ -48,7 +48,7 @@ const demoOrder = {
       description: "The marriage feast, in keeping with the Sunnah",
     },
   ],
-  rsvpWhatsApp: "919876543210",
+  rsvpWhatsApp: "918985798572",
   rsvp: {
     webhookUrl: "",
     deadline: "29th September 2026",

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import {
@@ -16,20 +15,14 @@ import {
   Clock,
   ShieldCheck,
   Heart,
-  Check,
   Palette,
   Wand2,
-  ChevronDown,
-  Home,
-  LayoutGrid,
-  Tag,
-  HelpCircle,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { templates } from "@/components/templates/TemplatesGallery";
+import { BottomNav } from "@/components/home/BottomNav";
 import { cn } from "@/lib/utils";
 
 /**
@@ -37,7 +30,7 @@ import { cn } from "@/lib/utils";
  * Replace WHATSAPP_NUMBER with the studio's real WhatsApp business number
  * (E.164 without the leading +). The default below is a placeholder.
  */
-const WHATSAPP_NUMBER = "919876543210";
+const WHATSAPP_NUMBER = "918985798572";
 const WHATSAPP_MESSAGE =
   "Assalamu Alaikum! I'd like to order a digital wedding invitation from Shaadi Cards.";
 const waLink = (msg: string = WHATSAPP_MESSAGE) =>
@@ -87,7 +80,7 @@ const steps = [
   {
     n: "01",
     title: "Pick your design",
-    desc: "Browse our living templates and choose the world that matches your story.",
+    desc: "Browse our living designs and choose the world that matches your story.",
   },
   {
     n: "02",
@@ -98,59 +91,6 @@ const steps = [
     n: "03",
     title: "Receive your link in 24h",
     desc: "Get a personalised, animated invitation link ready to share with every guest.",
-  },
-];
-
-const tiers = [
-  {
-    name: "Shaadi Lite",
-    price: "₹1,499",
-    tagline: "Small & beautiful",
-    features: [
-      "Clean animated design",
-      "Names, events & venue map",
-      "WhatsApp RSVP links",
-      "Delivered in 48 hours",
-    ],
-    popular: false,
-  },
-  {
-    name: "Shaadi Standard",
-    price: "₹2,999",
-    tagline: "Most loved",
-    features: [
-      "Heritage premium templates",
-      "Live RSVP with guest tracking",
-      "Countdown + full timeline",
-      "Arabic dua & calligraphy",
-      "Delivered in 24 hours",
-    ],
-    popular: true,
-  },
-  {
-    name: "Shaadi Premium",
-    price: "₹4,999",
-    tagline: "The showstopper",
-    features: [
-      "Cinematic flagship templates",
-      "Glassmorphism & 3D effects",
-      "Priority 24h delivery",
-      "Unlimited revision rounds",
-      "Custom colour matching",
-    ],
-    popular: false,
-  },
-  {
-    name: "Shaadi Custom",
-    price: "₹9,999+",
-    tagline: "Bespoke & exclusive",
-    features: [
-      "Designed from scratch for you",
-      "Dedicated designer",
-      "Exclusive one-of-a-kind concept",
-      "Everything in Premium",
-    ],
-    popular: false,
   },
 ];
 
@@ -175,112 +115,10 @@ const testimonials = [
   },
 ];
 
-const faqs = [
-  {
-    q: "How fast will I get my invitation?",
-    a: "Standard and Premium cards are delivered within 24 hours of receiving your details. Lite cards take up to 48 hours.",
-  },
-  {
-    q: "Can you write in Arabic, Malayalam or Urdu?",
-    a: "Yes. We handle Arabic calligraphy, duas and regional scripts natively — perfect for nikah invitations.",
-  },
-  {
-    q: "How do guests RSVP?",
-    a: "On Standard and above, guests confirm with one tap and responses land in your private Google Sheet. Lite cards use WhatsApp RSVP links.",
-  },
-  {
-    q: "What do you need from me?",
-    a: "Just your names, family lines, event dates, venues and any photos. Send them over WhatsApp and we build everything for you.",
-  },
-  {
-    q: "Will it work on older phones?",
-    a: "Every template is mobile-first and tuned to run smoothly on budget Android devices, with graceful fallbacks for reduced-motion users.",
-  },
-];
-
 const featured = templates.slice(0, 3);
-
-type NavItem = {
-  label: string;
-  icon: typeof Home;
-  /** in-page section anchor (scroll on home) */
-  id?: string;
-  /** full-page route (separate page) */
-  href?: string;
-};
-
-const navItems: NavItem[] = [
-  { id: "home", label: "Home", icon: Home },
-  { href: "/templates", label: "Designs", icon: LayoutGrid },
-  { id: "pricing", label: "Pricing", icon: Tag },
-  { id: "faq", label: "FAQ", icon: HelpCircle },
-];
-
-function TabButton({
-  id,
-  href,
-  label,
-  icon: Icon,
-  active,
-}: NavItem & { active: boolean }) {
-  const className = cn(
-    "flex flex-col items-center gap-1 rounded-xl py-1.5 font-[family-name:var(--font-invitation-sans)] transition-colors",
-    active ? "text-[#0f5e4a]" : "text-[#2c2c2c]/45",
-  );
-  const inner = (
-    <>
-      <Icon
-        className={cn(
-          "size-[22px] transition-transform",
-          active && "scale-110",
-        )}
-        strokeWidth={active ? 2.4 : 1.9}
-      />
-      <span className="text-[10px] font-medium tracking-wide">{label}</span>
-    </>
-  );
-
-  if (href) {
-    return (
-      <Link href={href} className={className}>
-        {inner}
-      </Link>
-    );
-  }
-  return (
-    <a
-      href={`#${id}`}
-      aria-current={active ? "page" : undefined}
-      className={className}
-    >
-      {inner}
-    </a>
-  );
-}
 
 export function HomeLanding() {
   const reduce = useReducedMotion();
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [activeSection, setActiveSection] = useState("home");
-
-  // Scroll-spy: highlight the bottom-nav tab for the section in view.
-  useEffect(() => {
-    const ids = ["home", "pricing", "faq"];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] },
-    );
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
 
   const fadeUp = {
     hidden: { opacity: 0, y: reduce ? 0 : 24 },
@@ -314,29 +152,34 @@ export function HomeLanding() {
             <span className="font-[family-name:var(--font-invitation-script)] text-xl text-[#d4af37]">
               ✦
             </span>
-            <span className="font-[family-name:var(--font-invitation-serif)] text-lg font-bold text-[#0f5e4a]">
-              Shaadi Cards
+            <span className="flex flex-col leading-none">
+              <span className="font-[family-name:var(--font-invitation-serif)] text-lg font-bold text-[#0f5e4a]">
+                Shaadi Cards
+              </span>
+              <span className="font-[family-name:var(--font-invitation-sans)] text-[10px] font-medium tracking-wide text-[#2c2c2c]/45">
+                by axonstack
+              </span>
             </span>
           </Link>
           <div className="hidden items-center gap-7 sm:flex">
             <Link
-              href="/templates"
+              href="/designs"
               className="font-[family-name:var(--font-invitation-sans)] text-sm text-[#2c2c2c]/70 transition-colors hover:text-[#0f5e4a]"
             >
               Designs
             </Link>
-            <a
-              href="#pricing"
+            <Link
+              href="/pricing"
               className="font-[family-name:var(--font-invitation-sans)] text-sm text-[#2c2c2c]/70 transition-colors hover:text-[#0f5e4a]"
             >
               Pricing
-            </a>
-            <a
-              href="#faq"
+            </Link>
+            <Link
+              href="/faq"
               className="font-[family-name:var(--font-invitation-sans)] text-sm text-[#2c2c2c]/70 transition-colors hover:text-[#0f5e4a]"
             >
               FAQ
-            </a>
+            </Link>
           </div>
           <Button
             asChild
@@ -409,7 +252,7 @@ export function HomeLanding() {
             >
               <a href="#templates">
                 <Eye className="size-5" />
-                View live templates
+                View live designs
               </a>
             </Button>
           </motion.div>
@@ -441,7 +284,7 @@ export function HomeLanding() {
         </motion.div>
       </section>
 
-      {/* ── Featured templates ───────────────────────── */}
+      {/* ── Featured designs ────────────────────────── */}
       <section id="templates" className="scroll-mt-20 px-6 py-16">
         <motion.div
           initial="hidden"
@@ -470,7 +313,7 @@ export function HomeLanding() {
                 transition={{ type: "spring", stiffness: 300, damping: 24 }}
                 className="group"
               >
-                <Link href={`/templates/${tpl.slug}`} className="block">
+                <Link href={`/designs/${tpl.slug}`} className="block">
                   <Card className="flex h-full flex-col overflow-hidden rounded-2xl border-[#d4af37]/25 bg-white/80 shadow-[0_10px_40px_rgba(0,0,0,0.06)] backdrop-blur transition-all duration-300 group-hover:border-[#d4af37]/70 group-hover:shadow-[0_24px_70px_rgba(212,175,55,0.22)]">
                     <div
                       className={cn(
@@ -549,7 +392,7 @@ export function HomeLanding() {
               variant="outline"
               className="rounded-full border-[#d4af37]/40 bg-white/70 px-8 font-[family-name:var(--font-invitation-sans)] font-semibold text-[#0f5e4a] backdrop-blur hover:bg-white"
             >
-              <Link href="/templates">
+              <Link href="/designs">
                 See all {templates.length} designs
                 <ArrowRight className="size-4" />
               </Link>
@@ -631,88 +474,6 @@ export function HomeLanding() {
         </motion.div>
       </section>
 
-      {/* ── Pricing ──────────────────────────────────── */}
-      <section id="pricing" className="scroll-mt-20 px-6 py-16">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={container}
-          className="mx-auto max-w-6xl"
-        >
-          <motion.div variants={fadeUp} className="mb-12 text-center">
-            <h2 className="font-[family-name:var(--font-invitation-serif)] text-3xl font-bold text-[#0f5e4a] sm:text-4xl">
-              Simple, honest pricing
-            </h2>
-            <p className="mx-auto mt-3 max-w-2xl font-[family-name:var(--font-invitation-sans)] text-[#2c2c2c]/65">
-              One-time payment. No subscriptions. Your invitation link stays
-              live forever.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {tiers.map((t) => (
-              <motion.div
-                key={t.name}
-                variants={fadeUp}
-                className={cn(
-                  "relative flex flex-col rounded-2xl border bg-white/70 p-6 backdrop-blur transition-all duration-300",
-                  t.popular
-                    ? "border-[#d4af37] shadow-[0_20px_60px_rgba(212,175,55,0.25)] sm:scale-[1.03]"
-                    : "border-[#d4af37]/20 hover:border-[#d4af37]/50",
-                )}
-              >
-                {t.popular && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[#d4af37] px-3 py-1 font-[family-name:var(--font-invitation-sans)] text-[10px] font-bold uppercase tracking-widest text-[#1a2942]">
-                    Most popular
-                  </span>
-                )}
-                <h3 className="font-[family-name:var(--font-invitation-serif)] text-xl font-bold text-[#0f5e4a]">
-                  {t.name}
-                </h3>
-                <p className="mt-0.5 font-[family-name:var(--font-invitation-sans)] text-xs uppercase tracking-widest text-[#b8941f]">
-                  {t.tagline}
-                </p>
-                <div className="mt-4 font-[family-name:var(--font-invitation-serif)] text-3xl font-bold text-[#2c2c2c]">
-                  {t.price}
-                </div>
-                <Separator className="my-5 bg-[#d4af37]/20" />
-                <ul className="flex-1 space-y-3">
-                  {t.features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-start gap-2 font-[family-name:var(--font-invitation-sans)] text-sm text-[#2c2c2c]/75"
-                    >
-                      <Check className="mt-0.5 size-4 shrink-0 text-[#0f5e4a]" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  asChild
-                  className={cn(
-                    "mt-6 w-full rounded-full font-[family-name:var(--font-invitation-sans)] font-semibold",
-                    t.popular
-                      ? "bg-[#d4af37] text-[#1a2942] hover:bg-[#b8941f]"
-                      : "bg-[#0f5e4a] text-white hover:bg-[#0a3d30]",
-                  )}
-                >
-                  <a
-                    href={waLink(
-                      `Assalamu Alaikum! I'm interested in the ${t.name} (${t.price}) wedding invitation.`,
-                    )}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Choose {t.name.replace("Shaadi ", "")}
-                  </a>
-                </Button>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
       {/* ── Testimonials ─────────────────────────────── */}
       <section className="px-6 py-16">
         <motion.div
@@ -755,55 +516,6 @@ export function HomeLanding() {
                 </Card>
               </motion.div>
             ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* ── FAQ ──────────────────────────────────────── */}
-      <section id="faq" className="scroll-mt-20 px-6 py-16">
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={container}
-          className="mx-auto max-w-3xl"
-        >
-          <motion.div variants={fadeUp} className="mb-10 text-center">
-            <h2 className="font-[family-name:var(--font-invitation-serif)] text-3xl font-bold text-[#0f5e4a] sm:text-4xl">
-              Questions, answered
-            </h2>
-          </motion.div>
-
-          <div className="space-y-3">
-            {faqs.map((f, i) => {
-              const open = openFaq === i;
-              return (
-                <motion.div key={f.q} variants={fadeUp}>
-                  <button
-                    type="button"
-                    onClick={() => setOpenFaq(open ? null : i)}
-                    className="w-full rounded-2xl border border-[#d4af37]/20 bg-white/70 p-5 text-left backdrop-blur transition-colors hover:border-[#d4af37]/45"
-                  >
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="font-[family-name:var(--font-invitation-serif)] font-semibold text-[#0f5e4a]">
-                        {f.q}
-                      </span>
-                      <ChevronDown
-                        className={cn(
-                          "size-5 shrink-0 text-[#b8941f] transition-transform duration-300",
-                          open && "rotate-180",
-                        )}
-                      />
-                    </div>
-                    {open && (
-                      <p className="mt-3 font-[family-name:var(--font-invitation-sans)] text-sm leading-relaxed text-[#2c2c2c]/70">
-                        {f.a}
-                      </p>
-                    )}
-                  </button>
-                </motion.div>
-              );
-            })}
           </div>
         </motion.div>
       </section>
@@ -855,9 +567,9 @@ export function HomeLanding() {
                 variant="outline"
                 className="w-full rounded-full border-white/40 bg-white/10 px-8 font-[family-name:var(--font-invitation-sans)] text-base font-semibold text-white backdrop-blur hover:bg-white/20 sm:w-auto"
               >
-                <Link href="/templates">
+                <Link href="/designs">
                   <Eye className="size-5" />
-                  Browse templates
+                  Browse designs
                 </Link>
               </Button>
             </div>
@@ -876,11 +588,11 @@ export function HomeLanding() {
               Shaadi Cards
             </span>
             <span className="font-[family-name:var(--font-invitation-sans)] text-sm text-[#2c2c2c]/50">
-              by AxonStack
+              by axonstack
             </span>
           </div>
           <p className="font-[family-name:var(--font-invitation-sans)] text-xs text-[#2c2c2c]/50">
-            © {new Date().getFullYear()} AxonStack · Crafted with care in Kerala
+            © {new Date().getFullYear()} AXONSTACK PVT LTD · Crafted with care in Kerala
           </p>
         </div>
       </footer>
@@ -897,42 +609,7 @@ export function HomeLanding() {
       </a>
 
       {/* ── Native-style bottom tab bar (mobile only) ── */}
-      <nav
-        aria-label="Primary"
-        className="fixed inset-x-0 bottom-0 z-50 border-t border-[#d4af37]/20 bg-[#faf8f3]/90 backdrop-blur-xl sm:hidden"
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
-      >
-        <div className="relative mx-auto grid max-w-md grid-cols-5 items-end px-2 pt-1.5 pb-2">
-          {navItems.slice(0, 2).map((it) => (
-            <TabButton
-              key={it.label}
-              {...it}
-              active={!!it.id && activeSection === it.id}
-            />
-          ))}
-
-          {/* Center elevated WhatsApp action */}
-          <div className="flex justify-center">
-            <a
-              href={waLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Order on WhatsApp"
-              className="-mt-7 flex size-14 flex-col items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/40 ring-4 ring-[#faf8f3] transition-transform active:scale-95"
-            >
-              <MessageCircle className="size-6" />
-            </a>
-          </div>
-
-          {navItems.slice(2).map((it) => (
-            <TabButton
-              key={it.label}
-              {...it}
-              active={!!it.id && activeSection === it.id}
-            />
-          ))}
-        </div>
-      </nav>
+      <BottomNav />
     </main>
   );
 }

@@ -19,6 +19,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { BottomNav } from "@/components/home/BottomNav";
 import { cn } from "@/lib/utils";
 
 export type TemplateInfo = {
@@ -138,7 +139,7 @@ export function TemplatesGallery() {
   };
 
   return (
-    <main className="invitation-root min-h-screen overflow-hidden">
+    <main className="invitation-root min-h-screen overflow-hidden pb-20 sm:pb-0">
       {/* Ambient background glow */}
       <div
         aria-hidden
@@ -163,7 +164,7 @@ export function TemplatesGallery() {
           >
             <Sparkles className="size-3.5 text-[#b8941f]" />
             <span className="font-[family-name:var(--font-invitation-sans)] tracking-wide">
-              Premium Invitation Collection
+              Premium Design Collection
             </span>
           </Badge>
 
@@ -306,7 +307,7 @@ export function TemplatesGallery() {
                     asChild
                     className="flex-1 rounded-full bg-[#0f5e4a] font-[family-name:var(--font-invitation-sans)] font-semibold text-white shadow-sm hover:bg-[#0a3d30]"
                   >
-                    <Link href={`/templates/${tpl.slug}`}>
+                    <Link href={`/designs/${tpl.slug}`}>
                       <Eye className="size-4" />
                       Preview
                       <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
@@ -328,7 +329,7 @@ export function TemplatesGallery() {
           </h2>
           <p className="mx-auto mt-2 max-w-md font-[family-name:var(--font-invitation-sans)] text-sm text-[#2c2c2c]/70">
             Every card is hand-tailored to your names, events, and story by the
-            AxonStack studio.
+            axonstack studio.
           </p>
           <Button
             asChild
@@ -342,6 +343,9 @@ export function TemplatesGallery() {
           </Button>
         </motion.div>
       </motion.section>
+
+      {/* ── Native-style bottom tab bar (mobile only) ── */}
+      <BottomNav />
     </main>
   );
 }

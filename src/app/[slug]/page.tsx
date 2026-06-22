@@ -38,7 +38,7 @@ export async function generateMetadata({
       type: "website",
       locale: "en_US",
       url,
-      siteName: "Shaadi Cards by AxonStack",
+      siteName: "Shaadi Cards by axonstack",
       title: `${order.title} · Wedding Invitation`,
       description,
     },

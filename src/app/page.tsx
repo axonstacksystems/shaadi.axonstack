@@ -4,7 +4,7 @@ import { HomeLanding } from "@/components/home/HomeLanding";
 export const metadata: Metadata = {
   title: "Shaadi Cards — Cinematic Digital Wedding Invitations in Kerala",
   description:
-    "Premium animated digital nikah & wedding invitations with live RSVP, countdowns and venue maps. Delivered as one shareable link in 24 hours. Crafted in Kerala by AxonStack.",
+    "Premium animated digital nikah & wedding invitations with live RSVP, countdowns and venue maps. Delivered as one shareable link in 24 hours. Crafted in Kerala by axonstack.",
   keywords: [
     "digital wedding invitation",
     "nikah invitation",

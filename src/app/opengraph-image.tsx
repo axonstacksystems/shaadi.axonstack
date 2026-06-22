@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 
 export const alt =
-  "Shaadi Cards — Digital Wedding Invitations by AxonStack";
+  "Shaadi Cards — Digital Wedding Invitations by axonstack";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -146,7 +146,7 @@ export default async function OgImage() {
         </span>
         <span style={{ color: "rgba(255, 255, 240, 0.4)" }}>·</span>
         <span style={{ color: "rgba(255, 255, 240, 0.85)" }}>
-          by AxonStack
+          by axonstack
         </span>
       </div>
     </div>,

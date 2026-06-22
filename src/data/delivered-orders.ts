@@ -105,7 +105,7 @@ export const deliveredOrders: DeliveredOrder[] = [
                 description: "Traditional Malabar cuisine served",
             },
         ],
-        rsvpWhatsApp: "919876543210",
+        rsvpWhatsApp: "918985798572",
         rsvp: {
             // Paste the Apps Script Web App URL here once published. While
             // empty, the card falls back to WhatsApp buttons.
@@ -147,7 +147,7 @@ export const deliveredOrders: DeliveredOrder[] = [
                 description: "Dinner and celebration with loved ones",
             },
         ],
-        rsvpWhatsApp: "919876543210",
+        rsvpWhatsApp: "918985798572",
         rsvp: {
             webhookUrl: "",
             deadline: "15th July 2026",
@@ -190,7 +190,7 @@ export const deliveredOrders: DeliveredOrder[] = [
                 description: "The marriage feast, in keeping with the Sunnah",
             },
         ],
-        rsvpWhatsApp: "919876543210",
+        rsvpWhatsApp: "918985798572",
         rsvp: {
             webhookUrl: "",
             deadline: "20th December 2026",
@@ -233,7 +233,7 @@ export const deliveredOrders: DeliveredOrder[] = [
                 description: "The marriage feast, in keeping with the Sunnah",
             },
         ],
-        rsvpWhatsApp: "919876543210",
+        rsvpWhatsApp: "918985798572",
         rsvp: {
             webhookUrl: "",
             deadline: "15th December 2026",
@@ -270,7 +270,7 @@ export const deliveredOrders: DeliveredOrder[] = [
                 description: "Dinner and celebration with loved ones",
             },
         ],
-        rsvpWhatsApp: "919876543210",
+        rsvpWhatsApp: "918985798572",
         rsvp: {
             webhookUrl: "",
             deadline: "10th November 2026",
@@ -318,7 +318,7 @@ export const deliveredOrders: DeliveredOrder[] = [
                 description: "The marriage feast, in keeping with the Sunnah",
             },
         ],
-        rsvpWhatsApp: "919876543210",
+        rsvpWhatsApp: "918985798572",
         rsvp: {
             webhookUrl: "",
             deadline: "10th August 2026",

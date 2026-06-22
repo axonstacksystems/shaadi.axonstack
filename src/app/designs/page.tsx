@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { TemplatesGallery } from "@/components/templates/TemplatesGallery";
 
 export const metadata: Metadata = {
-  title: "Templates — Shaadi Cards",
+  title: "Designs — Shaadi Cards",
   description:
-    "Browse all luxury digital wedding invitation templates by AxonStack. Tap any template to preview the live card.",
+    "Browse all luxury digital wedding invitation designs by axonstack. Tap any design to preview the live card.",
 };
 
 export default function TemplatesIndexPage() {

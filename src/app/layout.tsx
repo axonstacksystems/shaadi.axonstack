@@ -42,30 +42,30 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://shaadi.axonstack.in"),
-  applicationName: "Shaadi Cards by AxonStack",
+  applicationName: "Shaadi Cards by axonstack",
   title: {
-    default: "Shaadi Cards — Digital Wedding Invitations by AxonStack",
-    template: "%s · Shaadi Cards by AxonStack",
+    default: "Shaadi Cards — Digital Wedding Invitations by axonstack",
+    template: "%s · Shaadi Cards by axonstack",
   },
   description:
-    "Premium digital wedding invitations crafted by AxonStack. Cinematic, elegant, mobile-first cards delivered at shaadi.axonstack.in.",
-  authors: [{ name: "AxonStack", url: "https://axonstack.in" }],
-  creator: "AxonStack",
-  publisher: "AxonStack",
+    "Premium digital wedding invitations crafted by axonstack. Cinematic, elegant, mobile-first cards delivered at shaadi.axonstack.in.",
+  authors: [{ name: "AXONSTACK PVT LTD", url: "https://axonstack.in" }],
+  creator: "axonstack",
+  publisher: "AXONSTACK PVT LTD",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://shaadi.axonstack.in",
-    siteName: "Shaadi Cards by AxonStack",
-    title: "Shaadi Cards — Digital Wedding Invitations by AxonStack",
+    siteName: "Shaadi Cards by axonstack",
+    title: "Shaadi Cards — Digital Wedding Invitations by axonstack",
     description:
-      "Premium digital wedding invitations crafted by AxonStack. Cinematic, elegant, mobile-first cards.",
+      "Premium digital wedding invitations crafted by axonstack. Cinematic, elegant, mobile-first cards.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shaadi Cards — Digital Wedding Invitations by AxonStack",
+    title: "Shaadi Cards — Digital Wedding Invitations by axonstack",
     description:
-      "Premium digital wedding invitations crafted by AxonStack.",
+      "Premium digital wedding invitations crafted by axonstack.",
     creator: "@axonstack",
   },
   robots: { index: true, follow: true },

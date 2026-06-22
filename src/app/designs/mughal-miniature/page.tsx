@@ -28,7 +28,7 @@ const demoOrder = {
     { time: "10:00 AM", event: "Nikah Ceremony", description: "The sacred union witnessed by family and friends" },
     { time: "12:00 PM", event: "Reception", description: "Dinner and celebration with loved ones" },
   ],
-  rsvpWhatsApp: "919876543210",
+  rsvpWhatsApp: "918985798572",
   rsvp: {
     webhookUrl: "",
     deadline: "10th November 2026",
