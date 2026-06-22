@@ -456,7 +456,7 @@ export function NoorENikahCard({ order }: Props) {
             href="https://axonstack.in/apps/shaadi-cards"
             className="hover:text-[#2c2c2c]/60 transition-colors"
           >
-            AXONSTACK — Shaadi Cards
+            axonstack — Shaadi Cards
           </a>
         </p>
       </footer>

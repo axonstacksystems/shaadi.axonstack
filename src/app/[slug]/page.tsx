@@ -6,6 +6,10 @@ import {
 } from "@/data/delivered-orders";
 import { MalabarEmeraldCard } from "@/components/cards/MalabarEmeraldCard";
 import { NoorENikahCard } from "@/components/cards/NoorENikahCard";
+import { CelestialCanvasCard } from "@/components/cards/CelestialCanvasCard";
+import { NordicFrostCard } from "@/components/cards/NordicFrostCard";
+import { MughalMiniatureCard } from "@/components/cards/MughalMiniatureCard";
+import { MonsoonSpecialCard } from "@/components/cards/MonsoonSpecialCard";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -57,7 +61,14 @@ export default async function DeliveredCardPage({ params }: Props) {
       return <MalabarEmeraldCard order={order} />;
     case "noor-e-nikah":
       return <NoorENikahCard order={order} />;
-    // Future: kerala-ivory, midnight-nikah, etc.
+    case "celestial-canvas":
+      return <CelestialCanvasCard order={order} />;
+    case "nordic-frost":
+      return <NordicFrostCard order={order} />;
+    case "mughal-miniature":
+      return <MughalMiniatureCard order={order} />;
+    case "monsoon-special":
+      return <MonsoonSpecialCard order={order} />;
     default:
       notFound();
   }

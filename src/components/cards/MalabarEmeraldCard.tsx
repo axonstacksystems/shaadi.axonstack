@@ -289,7 +289,7 @@ export function MalabarEmeraldCard({ order }: Props) {
             href="https://axonstack.in/apps/shaadi-cards"
             className="hover:text-white/70 transition-colors"
           >
-            AXONSTACK — Shaadi Cards
+            axonstack — Shaadi Cards
           </a>
         </p>
       </footer>
