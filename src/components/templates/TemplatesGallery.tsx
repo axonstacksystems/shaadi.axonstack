@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { BottomNav } from "@/components/home/BottomNav";
+import { AppHeader } from "@/components/home/AppHeader";
 import { cn } from "@/lib/utils";
 
 export type TemplateInfo = {
@@ -150,8 +151,10 @@ export function TemplatesGallery() {
         }}
       />
 
+      <AppHeader />
+
       {/* Hero */}
-      <section className="px-6 pt-20 pb-10 sm:pt-28">
+      <section className="px-6 pt-12 pb-10 sm:pt-16">
         <motion.div
           initial={{ opacity: 0, y: reduce ? 0 : 20 }}
           animate={{ opacity: 1, y: 0 }}

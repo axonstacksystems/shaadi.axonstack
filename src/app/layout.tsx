@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import {
   Playfair_Display,
   Inter,
@@ -60,6 +61,14 @@ export const metadata: Metadata = {
     title: "Shaadi Cards — Digital Wedding Invitations by axonstack",
     description:
       "Premium digital wedding invitations crafted by axonstack. Cinematic, elegant, mobile-first cards.",
+    images: [
+      {
+        url: "/logo.png",
+        width: 1024,
+        height: 1024,
+        alt: "Shaadi Cards by axonstack",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -67,6 +76,17 @@ export const metadata: Metadata = {
     description:
       "Premium digital wedding invitations crafted by axonstack.",
     creator: "@axonstack",
+    images: ["/logo.png"],
+  },
+  icons: {
+    icon: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/icons/icon-192.png",
   },
   robots: { index: true, follow: true },
 };
@@ -87,7 +107,22 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Script
+          id="sw-register"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js');
+                });
+              }
+            `,
+          }}
+        />
+      </body>
     </html>
   );
 }

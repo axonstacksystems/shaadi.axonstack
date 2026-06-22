@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PricingSection } from "@/components/home/PricingSection";
 import { BottomNav } from "@/components/home/BottomNav";
+import { AppHeader } from "@/components/home/AppHeader";
 
 export const metadata: Metadata = {
   title: "Pricing — Shaadi Cards",
@@ -19,7 +20,7 @@ export default function PricingPage() {
             "radial-gradient(60% 50% at 50% 0%, rgba(212,175,55,0.14), transparent 70%), radial-gradient(50% 40% at 85% 20%, rgba(15,94,74,0.10), transparent 70%)",
         }}
       />
-      <div className="pt-16" />
+      <AppHeader />
       <PricingSection />
       <BottomNav />
     </main>

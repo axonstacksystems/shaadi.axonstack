@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 
 export const alt =
@@ -14,6 +14,11 @@ export default async function OgImage() {
       "node_modules/@fontsource/playfair-display/files/playfair-display-latin-700-normal.woff",
     ),
   );
+
+  const logoPath = join(process.cwd(), "public", "logo.png");
+  const logoData = existsSync(logoPath)
+    ? `data:image/png;base64,${readFileSync(logoPath).toString("base64")}`
+    : null;
 
   return new ImageResponse(
     <div
@@ -54,36 +59,48 @@ export default async function OgImage() {
         }}
       />
 
-      {/* Eyebrow */}
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-          color: "#d4af37",
-          fontSize: 20,
-          letterSpacing: 8,
-          textTransform: "uppercase",
-          marginBottom: 40,
-        }}
-      >
-        <span>✦</span>
-        <span>Digital Wedding Invitations</span>
-        <span>✦</span>
-      </div>
+      {/* Logo or fallback title */}
+      {logoData ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={logoData}
+          alt="Shaadi Cards by axonstack"
+          style={{ width: 240, height: 240, objectFit: "contain", marginBottom: 24 }}
+        />
+      ) : (
+        <>
+          {/* Eyebrow */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
+              color: "#d4af37",
+              fontSize: 20,
+              letterSpacing: 8,
+              textTransform: "uppercase",
+              marginBottom: 40,
+            }}
+          >
+            <span>✦</span>
+            <span>Digital Wedding Invitations</span>
+            <span>✦</span>
+          </div>
 
-      {/* Main title */}
-      <div
-        style={{
-          fontSize: 88,
-          fontWeight: 700,
-          color: "#fffff0",
-          textAlign: "center",
-          lineHeight: 1.1,
-        }}
-      >
-        Shaadi Cards
-      </div>
+          {/* Main title */}
+          <div
+            style={{
+              fontSize: 88,
+              fontWeight: 700,
+              color: "#fffff0",
+              textAlign: "center",
+              lineHeight: 1.1,
+            }}
+          >
+            Shaadi Cards
+          </div>
+        </>
+      )}
 
       {/* Divider */}
       <div
