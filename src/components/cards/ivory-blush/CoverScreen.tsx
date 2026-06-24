@@ -35,8 +35,103 @@ function usePetals(n: number): Petal[] {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   Large rose SVG cluster — used in all 4 corners
-   flip / flipY to mirror for each corner
+   Top rose cluster — roses concentrated near top of viewBox
+   so they burst inward richly when placed at top corners
+───────────────────────────────────────────────────────────── */
+function TopRoseCluster({ flip }: { flip?: boolean }) {
+  return (
+    <svg
+      viewBox="0 0 220 260"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ transform: flip ? "scaleX(-1)" : undefined, transformOrigin: "center", width: "100%", height: "100%" }}
+      aria-hidden="true"
+    >
+      {/* === Vines / stems — radiate outward from top-left corner === */}
+      <path d="M10 10 Q60 70 100 110 Q140 150 185 200" stroke="#C9A46A" strokeWidth="1.4" opacity="0.45" fill="none"/>
+      <path d="M10 10 Q40 60 80 90 Q120 120 165 160" stroke="#C9A46A" strokeWidth="1" opacity="0.32" fill="none"/>
+      <path d="M10 10 Q30 50 55 80 Q80 110 110 160" stroke="#C9A46A" strokeWidth="0.9" opacity="0.28" fill="none"/>
+      <path d="M0 40 Q40 60 70 100" stroke="#C9A46A" strokeWidth="0.8" opacity="0.25" fill="none"/>
+
+      {/* === Champagne leaves === */}
+      <ellipse cx="72" cy="82" rx="12" ry="22" fill="#D9B67A" opacity="0.3" transform="rotate(-35 72 82)"/>
+      <ellipse cx="50" cy="55" rx="9" ry="18" fill="#D9B67A" opacity="0.24" transform="rotate(20 50 55)"/>
+      <ellipse cx="115" cy="118" rx="10" ry="20" fill="#D9B67A" opacity="0.26" transform="rotate(-50 115 118)"/>
+      <ellipse cx="145" cy="148" rx="8" ry="16" fill="#D9B67A" opacity="0.2" transform="rotate(-25 145 148)"/>
+      <ellipse cx="28" cy="32" rx="8" ry="14" fill="#D9B67A" opacity="0.22" transform="rotate(35 28 32)"/>
+
+      {/* === Small filler flowers === */}
+      <circle cx="32" cy="22" r="12" fill="#FBF8F4" opacity="0.85"/>
+      <circle cx="32" cy="22" r="7"  fill="#F7F3EE" opacity="0.9"/>
+      <circle cx="52" cy="38" r="9"  fill="#FBF8F4" opacity="0.75"/>
+      <circle cx="18" cy="44" r="8"  fill="#FBF8F4" opacity="0.7"/>
+      <circle cx="98"  cy="115" r="7" fill="#FBF8F4" opacity="0.6"/>
+      <circle cx="158" cy="158" r="6" fill="#FBF8F4" opacity="0.55"/>
+
+      {/* === Main rose — large, top-left (corner anchor) === */}
+      <g transform="translate(68, 52)">
+        <ellipse rx="30" ry="34" fill="#ECC9C3" opacity="0.95"/>
+        <ellipse rx="23" ry="27" fill="#E4BAB3" opacity="0.9"/>
+        <ellipse rx="16" ry="20" fill="#D9A9A1" opacity="0.85"/>
+        <ellipse rx="10" ry="13" fill="#CF9B92" opacity="0.8"/>
+        <ellipse rx="5"  ry="7"  fill="#C48D83" opacity="0.75"/>
+        <circle  r="2.5"         fill="#B87E73"/>
+        <ellipse rx="30" ry="11" fill="#ECC9C3" opacity="0.38" transform="rotate(-30)"/>
+        <ellipse rx="30" ry="11" fill="#ECC9C3" opacity="0.33" transform="rotate(30)"/>
+        <ellipse rx="30" ry="11" fill="#ECC9C3" opacity="0.28" transform="rotate(-75)"/>
+        <ellipse rx="30" ry="11" fill="#ECC9C3" opacity="0.28" transform="rotate(75)"/>
+      </g>
+
+      {/* === Rose — medium, mid === */}
+      <g transform="translate(148, 148)">
+        <ellipse rx="22" ry="25" fill="#ECC9C3" opacity="0.92"/>
+        <ellipse rx="17" ry="19" fill="#E4BAB3" opacity="0.88"/>
+        <ellipse rx="11" ry="14" fill="#D9A9A1" opacity="0.82"/>
+        <ellipse rx="6"  ry="9"  fill="#CF9B92" opacity="0.78"/>
+        <circle  r="2"           fill="#B87E73"/>
+        <ellipse rx="22" ry="8"  fill="#ECC9C3" opacity="0.38" transform="rotate(-40)"/>
+        <ellipse rx="22" ry="8"  fill="#ECC9C3" opacity="0.32" transform="rotate(40)"/>
+      </g>
+
+      {/* === Rose — large, top-right corner (outward) === */}
+      <g transform="translate(185, 20)">
+        <ellipse rx="28" ry="32" fill="#ECC9C3" opacity="0.9"/>
+        <ellipse rx="21" ry="25" fill="#E0B4AC" opacity="0.88"/>
+        <ellipse rx="14" ry="18" fill="#D4A49B" opacity="0.84"/>
+        <ellipse rx="8"  ry="11" fill="#C99189" opacity="0.78"/>
+        <ellipse rx="4"  ry="6"  fill="#BC7F76" opacity="0.75"/>
+        <circle  r="2"           fill="#A86B62"/>
+        <ellipse rx="28" ry="10" fill="#ECC9C3" opacity="0.35" transform="rotate(-25)"/>
+        <ellipse rx="28" ry="10" fill="#ECC9C3" opacity="0.3"  transform="rotate(55)"/>
+      </g>
+
+      {/* === Small bud — far corner === */}
+      <g transform="translate(22, 18)">
+        <ellipse rx="14" ry="16" fill="#ECC9C3" opacity="0.85"/>
+        <ellipse rx="9"  ry="11" fill="#D9A9A1" opacity="0.8"/>
+        <ellipse rx="4"  ry="6"  fill="#CF9B92" opacity="0.75"/>
+        <circle  r="1.5"         fill="#B87E73"/>
+      </g>
+
+      {/* === Gold arabesque lattice (bottom-right of this cluster) === */}
+      <g opacity="0.16">
+        {[0,1,2,3].map(row => (
+          <g key={row}>
+            {[0,1,2,3].map(col => (
+              <g key={col} transform={`translate(${128+col*22},${160+row*22})`}>
+                <rect x="-8" y="-8" width="16" height="16" stroke="#CBA46A" strokeWidth="0.6" fill="none"/>
+                <rect x="-8" y="-8" width="16" height="16" stroke="#CBA46A" strokeWidth="0.6" fill="none" transform="rotate(45)"/>
+              </g>
+            ))}
+          </g>
+        ))}
+      </g>
+    </svg>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Large rose SVG cluster — used in bottom corners
 ───────────────────────────────────────────────────────────── */
 function RoseCluster({ flip, flipY, className }: {
   flip?: boolean; flipY?: boolean; className?: string;
@@ -276,15 +371,15 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
       />
 
       {/* ═══ LAYER 3 — ROSE CLUSTERS (all 4 corners, overlap arch) ═══ */}
-      {/* Top-left */}
+      {/* Top-left — dedicated cluster with roses near top */}
       <div className="pointer-events-none absolute -top-4 -left-4 z-[8]" aria-hidden="true"
         style={{ width:"clamp(160px,48vw,210px)", height:"clamp(190px,56vw,250px)" }}>
-        <RoseCluster/>
+        <TopRoseCluster/>
       </div>
-      {/* Top-right */}
+      {/* Top-right — mirrored horizontally */}
       <div className="pointer-events-none absolute -top-4 -right-4 z-[8]" aria-hidden="true"
         style={{ width:"clamp(160px,48vw,210px)", height:"clamp(190px,56vw,250px)" }}>
-        <RoseCluster flip/>
+        <TopRoseCluster flip/>
       </div>
       {/* Bottom-left */}
       <div className="pointer-events-none absolute -bottom-4 -left-4 z-[8]" aria-hidden="true"
