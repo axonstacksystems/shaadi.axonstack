@@ -243,7 +243,7 @@ export function IvoryBlushCard({ order }: Props) {
           <p style={{ fontSize: "11px", color: "#85705C" }}>
             Crafted with love by{" "}
             <a
-              href="https://axonstack.in/apps/shaadi-cards"
+              href="https://shaadi.axonstack.in/"
               style={{ color: "#CBA46A", textDecoration: "none" }}
             >
               axonstack — Shaadi Cards

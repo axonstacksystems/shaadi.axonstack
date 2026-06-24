@@ -417,110 +417,136 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
       />
 
       {/* ═══ LAYER 7 — CONTENT inside arch ═══ */}
-      <div className="absolute inset-0 z-[10] flex flex-col items-center"
-        style={{
-          paddingTop: "clamp(32px, 8dvh, 60px)",
-        }}
+      <div
+        className="absolute inset-0 z-[10] flex flex-col items-center justify-between"
+        style={{ paddingTop:"clamp(28px,7dvh,56px)", paddingBottom:"clamp(100px,22dvh,160px)" }}
       >
-        {/* Bismillah — engraved at top of arch */}
+        {/* ── TOP BLOCK: Bismillah ── */}
         <motion.div
           initial={{ opacity:0, y:-10 }}
           animate={{ opacity:1, y:0 }}
           transition={{ duration:0.9, delay:0.3 }}
-          className="text-center mb-1 relative"
+          className="text-center relative flex flex-col items-center"
         >
-          {/* subtle gold glow behind text */}
           <div className="absolute inset-0 blur-xl rounded-full"
-            style={{ background:"rgba(203,164,106,0.2)", transform:"scale(1.4)" }}
+            style={{ background:"rgba(203,164,106,0.22)", transform:"scale(1.6)" }}
             aria-hidden="true"
           />
           <p
             className="invitation-arabic relative"
             style={{
-              fontSize:"clamp(18px,4.5vw,26px)",
+              fontSize:"clamp(17px,4.2vw,25px)",
               fontWeight:500,
               color:"#9A7040",
               lineHeight:2,
               direction:"rtl",
-              textShadow:"0 1px 8px rgba(203,164,106,0.4)",
+              textShadow:"0 2px 12px rgba(203,164,106,0.5)",
             }}
             aria-label="Bismillah ir-Rahman ir-Rahim"
           >
             بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
           </p>
+          {/* Gold hairline separator — transitions Bismillah into names */}
+          <motion.div
+            initial={{ scaleX:0, opacity:0 }}
+            animate={{ scaleX:1, opacity:1 }}
+            transition={{ duration:0.7, delay:0.5 }}
+            style={{
+              width:"clamp(48px,12vw,64px)",
+              height:1,
+              marginTop:4,
+              background:"linear-gradient(to right,transparent,#CBA46A,transparent)",
+            }}
+            aria-hidden="true"
+          />
         </motion.div>
 
-        {/* Couple Names — editorial scale, dominant */}
+        {/* ── CENTRE BLOCK: Names ── */}
         <motion.div
           initial={{ opacity:0, y:18 }}
           animate={{ opacity:1, y:0 }}
           transition={{ duration:0.85, delay:0.55 }}
           className="text-center"
-          style={{ lineHeight:1.05 }}
+          style={{ lineHeight:1.0 }}
         >
-          <h1 style={{ fontFamily:'"Cormorant Garamond","Bodoni Moda",serif', color:"#3D2B1A" }}>
+          <h1 style={{ fontFamily:'"Cormorant Garamond","Bodoni Moda",serif', color:"#3D2B1A", margin:0 }}>
             {groom.split(" ").map((word, wi) => (
               <span key={wi} className="block"
-                style={{ fontSize:"clamp(44px,11vw,72px)", fontWeight:600, letterSpacing:"-0.01em" }}>
+                style={{ fontSize:"clamp(42px,10.5vw,68px)", fontWeight:600, letterSpacing:"-0.01em" }}>
                 {word}
               </span>
             ))}
+            {/* Whisper ampersand — delicate, not competing */}
             <span className="block" style={{
-              fontSize:"clamp(26px,6.5vw,40px)", fontWeight:300, fontStyle:"italic",
-              color:"#C9956A", marginTop:"2px", marginBottom:"2px",
+              fontSize:"clamp(18px,3.5vw,22px)",
+              fontWeight:200,
+              fontStyle:"italic",
+              color:"#C9A882",
+              margin:"6px 0",
+              letterSpacing:"0.18em",
               fontFamily:'"Cormorant Garamond",serif',
             }}>
               &amp;
             </span>
             <span className="block"
-              style={{ fontSize:"clamp(44px,11vw,72px)", fontWeight:600, letterSpacing:"-0.01em" }}>
+              style={{ fontSize:"clamp(42px,10.5vw,68px)", fontWeight:600, letterSpacing:"-0.01em" }}>
               {bride}
             </span>
           </h1>
         </motion.div>
 
-        {/* Mughal ornament divider */}
-        <motion.div
-          initial={{ opacity:0, scaleX:0.5 }}
-          animate={{ opacity:1, scaleX:1 }}
-          transition={{ duration:0.6, delay:0.8 }}
-          className="my-3"
-        >
-          <MughalOrnament uid={`${uid}b`}/>
-        </motion.div>
+        {/* ── BOTTOM BLOCK: Ornament + copy + date ── */}
+        <div className="flex flex-col items-center gap-2">
+          {/* Mughal ornament */}
+          <motion.div
+            initial={{ opacity:0, scaleX:0.5 }}
+            animate={{ opacity:1, scaleX:1 }}
+            transition={{ duration:0.6, delay:0.8 }}
+          >
+            <MughalOrnament uid={`${uid}b`}/>
+          </motion.div>
 
-        {/* Invitation copy — compact, close to names */}
-        <motion.p
-          initial={{ opacity:0, y:8 }}
-          animate={{ opacity:1, y:0 }}
-          transition={{ duration:0.6, delay:0.95 }}
-          className="text-center px-8 leading-snug"
-          style={{
-            fontSize:"clamp(12px,3.2vw,15px)",
-            color:"#7A5C3E",
-            fontFamily:'"Cormorant Garamond",serif',
-            fontStyle:"italic",
-          }}
-        >
-          Together with their families,<br/>
-          request the honor of your presence<br/>
-          at their <strong style={{ fontStyle:"normal", color:"#5A3D22" }}>Nikah</strong>
-        </motion.p>
+          {/* Invitation copy */}
+          <motion.p
+            initial={{ opacity:0, y:8 }}
+            animate={{ opacity:1, y:0 }}
+            transition={{ duration:0.6, delay:0.95 }}
+            className="text-center px-10"
+            style={{
+              fontSize:"clamp(11.5px,3vw,14px)",
+              color:"#7A5C3E",
+              fontFamily:'"Cormorant Garamond",serif',
+              fontStyle:"italic",
+              lineHeight:1.65,
+            }}
+          >
+            Together with their families,<br/>
+            request the honor of your presence<br/>
+            at their <strong style={{ fontStyle:"normal", color:"#5A3D22" }}>Nikah</strong>
+          </motion.p>
+
+          {/* Date — slim, tracking caps, gold */}
+          <motion.p
+            initial={{ opacity:0 }}
+            animate={{ opacity:1 }}
+            transition={{ duration:0.6, delay:1.1 }}
+            style={{
+              fontSize:"clamp(9px,2.2vw,11px)",
+              color:"#CBA46A",
+              letterSpacing:"0.22em",
+              textTransform:"uppercase",
+              fontFamily:"var(--font-invitation-sans),system-ui,sans-serif",
+              fontWeight:500,
+            }}
+          >
+            15 · December · 2026
+          </motion.p>
+        </div>
       </div>
 
       {/* ═══ LAYER 8 — CTA + swipe indicator, anchored to bottom ═══ */}
       <div className="absolute bottom-0 left-0 right-0 z-[20] flex flex-col items-center"
         style={{ paddingBottom:"max(20px,env(safe-area-inset-bottom,20px))", gap:"10px" }}>
-
-        {/* bottom arch ornament */}
-        <motion.div
-          initial={{ opacity:0 }}
-          animate={{ opacity:1 }}
-          transition={{ duration:0.5, delay:1.1 }}
-          className="mb-1"
-        >
-          <MughalOrnament uid={`${uid}c`}/>
-        </motion.div>
 
         {/* ── Premium glass capsule ── */}
         <motion.button
@@ -588,27 +614,26 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
           marginTop:-6,
         }}/>
 
-        {/* Swipe indicator */}
+        {/* Swipe indicator — tight to button */}
         <motion.div
           initial={{ opacity:0 }}
           animate={{ opacity:1 }}
           transition={{ duration:0.5, delay:1.6 }}
-          className="flex flex-col items-center gap-0.5"
+          className="flex flex-col items-center"
+          style={{ gap:3, marginTop:-2 }}
         >
-          <motion.div
-            animate={{ y:[0,-5,0] }}
-            transition={{ duration:2, repeat:Infinity, ease:"easeInOut" }}
-            className="flex flex-col items-center gap-0.5"
+          <motion.svg
+            width="16" height="10" viewBox="0 0 16 10"
+            animate={{ y:[0,-4,0] }}
+            transition={{ duration:2.2, repeat:Infinity, ease:"easeInOut" }}
             aria-hidden="true"
           >
-            <svg width="18" height="11" viewBox="0 0 18 11">
-              <path d="M1 9 L9 2 L17 9" stroke="#7A5C3E" strokeWidth="1.5"
-                strokeLinecap="round" strokeLinejoin="round" opacity="0.5"/>
-            </svg>
-          </motion.div>
+            <path d="M1 8 L8 2 L15 8" stroke="#7A5C3E" strokeWidth="1.4"
+              strokeLinecap="round" strokeLinejoin="round" opacity="0.45"/>
+          </motion.svg>
           <span style={{
-            fontSize:"10px", color:"#7A5C3E", opacity:0.5,
-            letterSpacing:"0.14em", textTransform:"uppercase",
+            fontSize:"9px", color:"#7A5C3E", opacity:0.42,
+            letterSpacing:"0.16em", textTransform:"uppercase",
             fontFamily:"var(--font-invitation-sans),system-ui,sans-serif",
           }}>
             Swipe up to continue
