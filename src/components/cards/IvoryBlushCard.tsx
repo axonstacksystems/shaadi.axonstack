@@ -17,6 +17,7 @@ import { ThemeProvider, useTheme } from "./ivory-blush/ThemeContext";
 
 interface Props {
   order: DeliveredOrder;
+  initialTheme?: string;
 }
 
 function IvoryBlushCardInner({ order }: Props) {
@@ -280,9 +281,9 @@ function IvoryBlushCardInner({ order }: Props) {
   );
 }
 
-export function IvoryBlushCard({ order }: Props) {
+export function IvoryBlushCard({ order, initialTheme }: Props) {
   return (
-    <ThemeProvider>
+    <ThemeProvider initialTheme={initialTheme}>
       <IvoryBlushCardInner order={order} />
     </ThemeProvider>
   );

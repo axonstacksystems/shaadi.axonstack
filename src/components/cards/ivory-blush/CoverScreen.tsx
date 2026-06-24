@@ -3,8 +3,10 @@
 import { useEffect, useState, useId } from "react";
 import { motion } from "motion/react";
 import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useTheme } from "./ThemeContext";
 import { THEMES, THEME_ORDER } from "./themes";
+import { PreviewToolbar } from "./PreviewToolbar";
 
 interface CoverScreenProps {
   groom: string;
@@ -337,8 +339,15 @@ function Petals({ list, petalColor, goldColor }: { list: Petal[]; petalColor: st
 export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
   const petals = usePetals(16);
   const uid = useId().replace(/:/g,"");
-  const { theme, themeId, cycleTheme } = useTheme();
-  const nextTheme = THEMES[THEME_ORDER[(THEME_ORDER.indexOf(themeId) + 1) % THEME_ORDER.length]];
+  const { theme, themeId } = useTheme();
+  const router = useRouter();
+  const nextThemeId = THEME_ORDER[(THEME_ORDER.indexOf(themeId) + 1) % THEME_ORDER.length];
+  const nextTheme = THEMES[nextThemeId];
+
+  function handleThemeSwitch() {
+    const base = "/designs/ivory-blush";
+    router.push(`${base}/${nextThemeId}`);
+  }
 
   return (
     <div
@@ -556,6 +565,19 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
       <div className="absolute bottom-0 left-0 right-0 z-[20] flex flex-col items-center"
         style={{ paddingBottom:"max(20px,env(safe-area-inset-bottom,20px))", gap:"10px" }}>
 
+        {/* ── Unified floating toolbar ── */}
+        <PreviewToolbar
+          accentColor={theme.gold}
+          nextThemeSwatch={nextTheme.swatch}
+          nextThemeLabel={nextTheme.label}
+          nextThemeAriaLabel={`Switch to ${nextTheme.label} theme`}
+          mrp="₹2k"
+          salePrice="₹999"
+          discountLabel="50% OFF"
+          whatsappHref="https://wa.me/918985798572?text=Hi%2C%20I%27m%20interested%20in%20the%20Ivory%20Blush%20wedding%20invitation%20%E2%80%94%20please%20share%20details!"
+          onThemeSwitch={handleThemeSwitch}
+        />
+
         {/* ── Premium glass capsule ── */}
         <motion.button
           initial={{ opacity:0, y:24, scale:0.95 }}
@@ -651,50 +673,6 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
         </motion.div>
       </div>
 
-      {/* ═══ Floating theme switcher ═══ */}
-      <motion.button
-        initial={{ opacity:0, scale:0.8 }}
-        animate={{ opacity:1, scale:1 }}
-        transition={{ duration:0.5, delay:1.8 }}
-        onClick={cycleTheme}
-        aria-label={`Switch to ${nextTheme.label} theme`}
-        title={`Switch to ${nextTheme.label}`}
-        style={{
-          position:"absolute",
-          top:"clamp(14px,4dvh,24px)",
-          right:16,
-          zIndex:30,
-          display:"flex",
-          alignItems:"center",
-          gap:6,
-          padding:"6px 12px 6px 8px",
-          borderRadius:999,
-          background:theme.glassBg,
-          backdropFilter:"blur(16px)",
-          WebkitBackdropFilter:"blur(16px)",
-          border:`1px solid ${theme.mosqueTint}0.25)`,
-          boxShadow:`0 4px 16px ${theme.mosqueTint}0.15)`,
-          cursor:"pointer",
-          transition:"all 0.4s ease",
-        }}
-      >
-        <div style={{
-          width:18, height:18, borderRadius:"50%",
-          background:nextTheme.swatch,
-          boxShadow:`0 0 0 2px ${theme.glassBorder}`,
-          flexShrink:0,
-        }}/>
-        <span style={{
-          fontSize:"10px",
-          fontWeight:600,
-          letterSpacing:"0.1em",
-          textTransform:"uppercase",
-          color:theme.textMid,
-          fontFamily:"var(--font-invitation-sans),system-ui,sans-serif",
-        }}>
-          {nextTheme.label}
-        </span>
-      </motion.button>
     </div>
   );
 }

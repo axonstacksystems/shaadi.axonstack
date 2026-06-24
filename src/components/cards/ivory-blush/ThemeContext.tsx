@@ -15,8 +15,8 @@ const ThemeContext = createContext<ThemeContextValue>({
   cycleTheme: () => {},
 });
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [themeId, setThemeId] = useState("ivory-blush");
+export function ThemeProvider({ children, initialTheme = "ivory-blush" }: { children: React.ReactNode; initialTheme?: string }) {
+  const [themeId, setThemeId] = useState(THEMES[initialTheme] ? initialTheme : "ivory-blush");
 
   function cycleTheme() {
     setThemeId(prev => {
