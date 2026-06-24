@@ -565,19 +565,6 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
       <div className="absolute bottom-0 left-0 right-0 z-[20] flex flex-col items-center"
         style={{ paddingBottom:"max(20px,env(safe-area-inset-bottom,20px))", gap:"10px" }}>
 
-        {/* ── Unified floating toolbar ── */}
-        <PreviewToolbar
-          accentColor={theme.gold}
-          nextThemeSwatch={nextTheme.swatch}
-          nextThemeLabel={nextTheme.label}
-          nextThemeAriaLabel={`Switch to ${nextTheme.label} theme`}
-          mrp="₹2k"
-          salePrice="₹999"
-          discountLabel="50% OFF"
-          whatsappHref="https://wa.me/918985798572?text=Hi%2C%20I%27m%20interested%20in%20the%20Ivory%20Blush%20wedding%20invitation%20%E2%80%94%20please%20share%20details!"
-          onThemeSwitch={handleThemeSwitch}
-        />
-
         {/* ── Premium glass capsule ── */}
         <motion.button
           initial={{ opacity:0, y:24, scale:0.95 }}
@@ -672,6 +659,19 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
           </span>
         </motion.div>
       </div>
+
+      {/* ═══ LAYER 9 — Draggable preview toolbar ═══ */}
+      <PreviewToolbar
+        accentColor={theme.gold}
+        nextThemeSwatch={nextTheme.swatch}
+        nextThemeLabel={nextTheme.label}
+        nextThemeAriaLabel={`Switch to ${nextTheme.label} theme`}
+        mrp="₹2,000"
+        salePrice="₹999"
+        discountLabel="50% OFF"
+        whatsappHref="https://wa.me/918985798572?text=Hi%2C%20I%27m%20interested%20in%20the%20Ivory%20Blush%20wedding%20invitation%20%E2%80%94%20please%20share%20details!"
+        onThemeSwitch={handleThemeSwitch}
+      />
 
     </div>
   );
