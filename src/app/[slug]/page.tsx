@@ -10,6 +10,7 @@ import { CelestialCanvasCard } from "@/components/cards/CelestialCanvasCard";
 import { NordicFrostCard } from "@/components/cards/NordicFrostCard";
 import { MughalMiniatureCard } from "@/components/cards/MughalMiniatureCard";
 import { MonsoonSpecialCard } from "@/components/cards/MonsoonSpecialCard";
+import { IvoryBlushCard } from "@/components/cards/IvoryBlushCard";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -69,6 +70,8 @@ export default async function DeliveredCardPage({ params }: Props) {
       return <MughalMiniatureCard order={order} />;
     case "monsoon-special":
       return <MonsoonSpecialCard order={order} />;
+    case "ivory-blush":
+      return <IvoryBlushCard order={order} />;
     default:
       notFound();
   }

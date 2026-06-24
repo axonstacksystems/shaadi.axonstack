@@ -113,10 +113,22 @@ export const templates: TemplateInfo[] = [
     tags: ["Botanical", "Rainfall", "Verdant"],
     tone: "dark",
   },
+  {
+    slug: "ivory-blush",
+    name: "Ivory Blush",
+    tagline: "Apple-luxury elegance",
+    description:
+      "Champagne ivory and blush rose glassmorphism — an editorial Islamic invitation with drifting petals and live countdown.",
+    accent: "from-[#F7F3EE] via-[#E8C6C1] to-[#D9B67A]",
+    palette: ["#FBF8F4", "#E8C6C1", "#D9B67A", "#4B3A2A"],
+    signature: "Floating rose petals",
+    tags: ["Glassmorphism", "Blush Rose", "Champagne Gold"],
+    tone: "light",
+  },
 ];
 
 const stats = [
-  { value: "6", label: "Unique designs" },
+  { value: "7", label: "Unique designs" },
   { value: "100%", label: "Mobile-first" },
   { value: "∞", label: "Personalisation" },
 ];
@@ -177,7 +189,7 @@ export function TemplatesGallery() {
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl font-[family-name:var(--font-invitation-sans)] text-lg leading-relaxed text-[#2c2c2c]/70">
-            Six distinct visual worlds — each a living, animated invitation.
+            Seven distinct visual worlds — each a living, animated invitation.
             Tap any design to experience the full card.
           </p>
 
