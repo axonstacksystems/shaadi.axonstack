@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion } from "motion/react";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import type { DeliveredOrder } from "@/data/delivered-orders";
 import { FloatingPetals } from "./ivory-blush/FloatingPetals";
 import { InvitationHeader } from "./ivory-blush/InvitationHeader";
@@ -12,6 +12,7 @@ import { VenueCard } from "./ivory-blush/VenueCard";
 import { FamilyCard } from "./ivory-blush/FamilyCard";
 import { RSVPCard } from "./ivory-blush/RSVPCard";
 import { ActionBar } from "./ivory-blush/ActionBar";
+import { CoverScreen } from "./ivory-blush/CoverScreen";
 
 interface Props {
   order: DeliveredOrder;
@@ -19,6 +20,11 @@ interface Props {
 
 export function IvoryBlushCard({ order }: Props) {
   const rsvpRef = useRef<HTMLDivElement>(null);
+  const [showCover, setShowCover] = useState(true);
+
+  function handleOpen() {
+    setShowCover(false);
+  }
 
   function scrollToRSVP() {
     rsvpRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -47,13 +53,39 @@ export function IvoryBlushCard({ order }: Props) {
 
   return (
     <div
-      className="relative min-h-screen"
+      className="relative"
       style={{
-        background: "linear-gradient(180deg, #FFFDFC 0%, #FAF4EF 100%)",
         fontFamily: "var(--font-invitation-sans), system-ui, sans-serif",
         WebkitFontSmoothing: "antialiased",
       }}
     >
+      {/* ── Cover Screen ── AnimatePresence gives it an exit animation */}
+      <AnimatePresence>
+        {showCover && (
+          <motion.div
+            key="cover"
+            className="fixed inset-0 z-[100]"
+            exit={{ opacity: 0, y: "-8%", scale: 1.02 }}
+            transition={{ duration: 0.9, ease: [0.4, 0, 0.2, 1] }}
+            style={{ willChange: "transform, opacity" }}
+          >
+            <CoverScreen
+              groom={order.groom}
+              bride={order.bride}
+              onOpen={handleOpen}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Details Page — always rendered underneath ── */}
+      <motion.div
+        initial={false}
+        animate={showCover ? { opacity: 0, scale: 0.97 } : { opacity: 1, scale: 1 }}
+        transition={{ duration: 0.65, delay: showCover ? 0 : 0.25, ease: [0.4, 0, 0.2, 1] }}
+        className="relative min-h-screen"
+        style={{ background: "linear-gradient(180deg, #FFFDFC 0%, #FAF4EF 100%)" }}
+      >
       {/* Floating petals */}
       <FloatingPetals />
 
@@ -230,6 +262,7 @@ export function IvoryBlushCard({ order }: Props) {
         venueAddress={order.primaryEvent.venueAddress}
         onRSVP={scrollToRSVP}
       />
+      </motion.div>
     </div>
   );
 }

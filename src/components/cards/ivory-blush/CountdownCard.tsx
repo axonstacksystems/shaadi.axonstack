@@ -26,14 +26,15 @@ interface CountdownCardProps {
 }
 
 export function CountdownCard({ targetDateIso }: CountdownCardProps) {
-  const target = new Date(targetDateIso);
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(calcTimeLeft(target));
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    days: 0, hours: 0, minutes: 0, seconds: 0,
+  });
 
   useEffect(() => {
+    const target = new Date(targetDateIso);
     setTimeLeft(calcTimeLeft(target));
     const id = setInterval(() => setTimeLeft(calcTimeLeft(target)), 1000);
     return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [targetDateIso]);
 
   const units = [
