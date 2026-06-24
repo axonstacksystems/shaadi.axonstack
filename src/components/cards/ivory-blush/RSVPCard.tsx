@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { useTheme } from "./ThemeContext";
 
 interface RSVPCardProps {
   groom: string;
@@ -29,6 +30,7 @@ function RSVPModal({
   deadline,
   onClose,
 }: RSVPModalProps) {
+  const { theme } = useTheme();
   const [name, setName] = useState("");
   const [guests, setGuests] = useState(1);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
@@ -66,7 +68,7 @@ function RSVPModal({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-end justify-center sm:items-center"
-      style={{ background: "rgba(75,58,42,0.4)", backdropFilter: "blur(8px)" }}
+      style={{ background: `${theme.mosqueTint}0.4)`, backdropFilter: "blur(8px)" }}
       onClick={(e) => e.target === e.currentTarget && onClose()}
       role="dialog"
       aria-modal="true"
@@ -85,7 +87,7 @@ function RSVPModal({
             style={{
               fontFamily: '"Cormorant Garamond", serif',
               fontSize: 22,
-              color: "#4B3A2A",
+              color: theme.textDark,
               fontWeight: 600,
             }}
           >
@@ -94,10 +96,10 @@ function RSVPModal({
           <button
             onClick={onClose}
             className="w-8 h-8 rounded-full flex items-center justify-center"
-            style={{ background: "rgba(75,58,42,0.08)" }}
+            style={{ background: `${theme.mosqueTint}0.08)` }}
             aria-label="Close RSVP form"
           >
-            <X size={16} style={{ color: "#85705C" }} />
+            <X size={16} style={{ color: theme.textLight }} />
           </button>
         </div>
 
@@ -109,11 +111,11 @@ function RSVPModal({
               animate={{ opacity: 1, scale: 1 }}
               className="text-center py-6"
             >
-              <CheckCircle size={48} style={{ color: "#CBA46A", margin: "0 auto 12px" }} />
-              <p style={{ color: "#4B3A2A", fontSize: 16, fontWeight: 600 }}>
+              <CheckCircle size={48} style={{ color: theme.gold, margin: "0 auto 12px" }} />
+              <p style={{ color: theme.textDark, fontSize: 16, fontWeight: 600 }}>
                 JazakAllah Khair!
               </p>
-              <p style={{ color: "#85705C", fontSize: 13, marginTop: 6 }}>
+              <p style={{ color: theme.textLight, fontSize: 13, marginTop: 6 }}>
                 Your RSVP has been confirmed.
               </p>
             </motion.div>
@@ -125,10 +127,10 @@ function RSVPModal({
               className="text-center py-6"
             >
               <AlertCircle size={48} style={{ color: "#D8A9A2", margin: "0 auto 12px" }} />
-              <p style={{ color: "#4B3A2A", fontSize: 16, fontWeight: 600 }}>
+              <p style={{ color: theme.textDark, fontSize: 16, fontWeight: 600 }}>
                 Something went wrong
               </p>
-              <p style={{ color: "#85705C", fontSize: 13, marginTop: 6 }}>
+              <p style={{ color: theme.textLight, fontSize: 13, marginTop: 6 }}>
                 Please try via WhatsApp.
               </p>
               <a
@@ -136,7 +138,7 @@ function RSVPModal({
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 inline-block rounded-full px-6 py-2.5 text-sm font-semibold text-white"
-                style={{ background: "linear-gradient(135deg,#CBA46A,#B99054)" }}
+                style={{ background: theme.buttonCircleBg }}
               >
                 Open WhatsApp
               </a>
@@ -148,7 +150,7 @@ function RSVPModal({
               className="space-y-4"
             >
               {deadline && (
-                <p style={{ fontSize: 12, color: "#85705C", textAlign: "center" }}>
+                <p style={{ fontSize: 12, color: theme.textLight, textAlign: "center" }}>
                   Please respond by <strong>{deadline}</strong>
                 </p>
               )}
@@ -156,7 +158,7 @@ function RSVPModal({
                 <label
                   htmlFor="rsvp-name"
                   className="block mb-1.5"
-                  style={{ fontSize: 12, color: "#85705C", fontWeight: 500 }}
+                  style={{ fontSize: 12, color: theme.textLight, fontWeight: 500 }}
                 >
                   Your Name
                 </label>
@@ -170,9 +172,9 @@ function RSVPModal({
                   className="w-full rounded-2xl px-4 py-3 outline-none"
                   style={{
                     background: "rgba(255,255,255,0.8)",
-                    border: "1px solid rgba(203,164,106,0.3)",
+                    border: `1px solid ${theme.mosqueTint}0.3)`,
                     fontSize: 14,
-                    color: "#4B3A2A",
+                    color: theme.textDark,
                   }}
                 />
               </div>
@@ -180,7 +182,7 @@ function RSVPModal({
                 <label
                   htmlFor="rsvp-guests"
                   className="block mb-1.5"
-                  style={{ fontSize: 12, color: "#85705C", fontWeight: 500 }}
+                  style={{ fontSize: 12, color: theme.textLight, fontWeight: 500 }}
                 >
                   Number of Guests
                 </label>
@@ -194,12 +196,12 @@ function RSVPModal({
                       style={
                         guests === n
                           ? {
-                              background: "linear-gradient(135deg,#CBA46A,#B99054)",
+                              background: theme.buttonCircleBg,
                               color: "#fff",
                             }
                           : {
-                              background: "rgba(203,164,106,0.12)",
-                              color: "#85705C",
+                              background: `${theme.mosqueTint}0.12)`,
+                              color: theme.textLight,
                             }
                       }
                       aria-pressed={guests === n}
@@ -214,7 +216,7 @@ function RSVPModal({
                 type="submit"
                 disabled={status === "loading" || !name.trim()}
                 className="w-full rounded-full py-3.5 font-semibold text-white text-sm flex items-center justify-center gap-2 transition-opacity disabled:opacity-60"
-                style={{ background: "linear-gradient(135deg,#CBA46A,#B99054)" }}
+                style={{ background: theme.buttonCircleBg }}
               >
                 {status === "loading" ? (
                   <>
@@ -240,6 +242,7 @@ export function RSVPCard({
   rsvpWhatsApp,
   deadline,
 }: RSVPCardProps) {
+  const { theme } = useTheme();
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -252,32 +255,40 @@ export function RSVPCard({
         className="px-4 pb-6"
         aria-label="RSVP"
       >
-        <div className="ib-glass-rose p-6 text-center">
+        <div className="p-6 text-center" style={{
+          background: `linear-gradient(135deg, ${theme.petalPrimary}CC, ${theme.petalSecondary}CC)`,
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
+          border: `1px solid rgba(255,255,255,0.6)`,
+          borderRadius: 28,
+          boxShadow: `0 10px 30px rgba(0,0,0,0.06), 0 2px 10px ${theme.mosqueTint}0.12)`,
+          transition: "background 0.6s ease",
+        }}>
           <p
             className="font-semibold mb-2"
             style={{
               fontFamily: '"Cormorant Garamond", serif',
               fontSize: "clamp(20px, 5.5vw, 26px)",
-              color: "#4B3A2A",
+              color: theme.textDark,
             }}
           >
             Kindly RSVP
           </p>
           <p
             className="mb-5 leading-relaxed"
-            style={{ fontSize: "13px", color: "#85705C" }}
+            style={{ fontSize: "13px", color: theme.textLight }}
           >
             We would be honored by your presence and blessings.
             {deadline && (
               <>
-                {" "}Please confirm by <strong style={{ color: "#4B3A2A" }}>{deadline}</strong>.
+                {" "}Please confirm by <strong style={{ color: theme.textDark }}>{deadline}</strong>.
               </>
             )}
           </p>
           <button
             onClick={() => setShowModal(true)}
             className="rounded-full px-7 py-3 font-semibold text-white text-sm transition-all active:scale-95"
-            style={{ background: "linear-gradient(135deg,#CBA46A,#B99054)" }}
+            style={{ background: theme.buttonCircleBg }}
             aria-haspopup="dialog"
           >
             Confirm RSVP

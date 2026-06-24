@@ -13,12 +13,14 @@ import { FamilyCard } from "./ivory-blush/FamilyCard";
 import { RSVPCard } from "./ivory-blush/RSVPCard";
 import { ActionBar } from "./ivory-blush/ActionBar";
 import { CoverScreen } from "./ivory-blush/CoverScreen";
+import { ThemeProvider, useTheme } from "./ivory-blush/ThemeContext";
 
 interface Props {
   order: DeliveredOrder;
 }
 
-export function IvoryBlushCard({ order }: Props) {
+function IvoryBlushCardInner({ order }: Props) {
+  const { theme } = useTheme();
   const rsvpRef = useRef<HTMLDivElement>(null);
   const [showCover, setShowCover] = useState(true);
 
@@ -57,7 +59,8 @@ export function IvoryBlushCard({ order }: Props) {
       style={{
         fontFamily: "var(--font-invitation-sans), system-ui, sans-serif",
         WebkitFontSmoothing: "antialiased",
-      }}
+        "--ib-glass-shadow": theme.glassShadow,
+      } as React.CSSProperties}
     >
       {/* ── Cover Screen ── AnimatePresence gives it an exit animation */}
       <AnimatePresence>
@@ -84,7 +87,7 @@ export function IvoryBlushCard({ order }: Props) {
         animate={showCover ? { opacity: 0, scale: 0.97 } : { opacity: 1, scale: 1 }}
         transition={{ duration: 0.65, delay: showCover ? 0 : 0.25, ease: [0.4, 0, 0.2, 1] }}
         className="relative min-h-screen"
-        style={{ background: "linear-gradient(180deg, #FFFDFC 0%, #FAF4EF 100%)" }}
+        style={{ background: theme.pageBg, transition:"background 0.6s ease" }}
       >
       {/* Floating petals */}
       <FloatingPetals />
@@ -99,15 +102,25 @@ export function IvoryBlushCard({ order }: Props) {
       <div className="mx-auto max-w-[480px] relative z-10 pb-28">
 
         {/* ── Header ─────────────────────────────────────────── */}
-        <InvitationHeader groom={order.groom} bride={order.bride} />
+        <InvitationHeader
+          groom={order.groom}
+          bride={order.bride}
+          eventDate={new Date(order.eventDateIso).toLocaleDateString("en-GB", { day:"numeric", month:"long", year:"numeric" }).replace(/ /g, " · ")}
+        />
 
         {/* Invitation tagline */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, delay: 0.6 }}
-          className="text-center px-8 pb-5"
-          style={{ fontSize: "13px", color: "#85705C", fontStyle: "italic", lineHeight: 1.6 }}
+          className="text-center px-8 pb-6"
+          style={{
+            fontSize: "clamp(13px,3.5vw,15px)",
+            color: theme.textMid,
+            fontStyle: "italic",
+            lineHeight: 1.7,
+            fontFamily: '"Cormorant Garamond",serif',
+          }}
         >
           {order.invitationLine}
         </motion.p>
@@ -149,26 +162,26 @@ export function IvoryBlushCard({ order }: Props) {
           <div
             className="rounded-[28px] p-6 text-center"
             style={{
-              background: "linear-gradient(135deg, rgba(217,182,122,0.18), rgba(203,164,106,0.12))",
-              border: "1px solid rgba(217,182,122,0.35)",
+              background: `linear-gradient(135deg, ${theme.mosqueTint}0.18), ${theme.mosqueTint}0.12))`,
+              border: `1px solid ${theme.mosqueTint}0.35)`,
             }}
           >
             <p
               className="invitation-arabic mb-3"
-              style={{ fontSize: "clamp(17px, 4.5vw, 22px)", color: "#B99054", lineHeight: 2, direction: "rtl" }}
+              style={{ fontSize: "clamp(17px, 4.5vw, 22px)", color: theme.goldMuted, lineHeight: 2, direction: "rtl" }}
             >
               وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا
             </p>
             <p
               className="italic leading-relaxed"
-              style={{ fontSize: "12px", color: "#85705C" }}
+              style={{ fontSize: "12px", color: theme.textLight }}
             >
               &ldquo;And among His signs is that He created for you mates from among yourselves,
               that you may dwell in tranquillity with them.&rdquo;
             </p>
             <p
               className="mt-2 tracking-widest font-semibold"
-              style={{ fontSize: "9px", color: "#CBA46A" }}
+              style={{ fontSize: "9px", color: theme.gold }}
             >
               — SURAH AR-RUM 30:21
             </p>
@@ -198,26 +211,26 @@ export function IvoryBlushCard({ order }: Props) {
           <div className="text-center py-4">
             {/* Ornamental divider */}
             <div className="flex items-center justify-center gap-3 mb-5" aria-hidden="true">
-              <div className="h-px flex-1" style={{ background: "linear-gradient(to right, transparent, rgba(203,164,106,0.4))" }} />
+              <div className="h-px flex-1" style={{ background: `linear-gradient(to right, transparent, ${theme.mosqueTint}0.4))` }} />
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <circle cx="10" cy="10" r="3" fill="#D9B67A" opacity="0.6"/>
-                <circle cx="10" cy="10" r="1.5" fill="#CBA46A"/>
+                <circle cx="10" cy="10" r="3" fill={theme.dividerColor} opacity="0.6"/>
+                <circle cx="10" cy="10" r="1.5" fill={theme.gold}/>
               </svg>
-              <div className="h-px flex-1" style={{ background: "linear-gradient(to left, transparent, rgba(203,164,106,0.4))" }} />
+              <div className="h-px flex-1" style={{ background: `linear-gradient(to left, transparent, ${theme.mosqueTint}0.4))` }} />
             </div>
             <p
               className="invitation-arabic mb-3"
-              style={{ fontSize: "clamp(16px, 4vw, 20px)", color: "#B99054", lineHeight: 2, direction: "rtl" }}
+              style={{ fontSize: "clamp(16px, 4vw, 20px)", color: theme.goldMuted, lineHeight: 2, direction: "rtl" }}
             >
               {order.closingDuaArabic ?? "بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ"}
             </p>
             <p
               className="italic"
-              style={{ fontSize: "12px", color: "#85705C" }}
+              style={{ fontSize: "12px", color: theme.textLight }}
             >
               {order.closingDua ?? "May Allah bless you both and unite you in goodness."}
             </p>
-            <p className="mt-4" style={{ fontSize: "11px", color: "#85705C" }}>
+            <p className="mt-4" style={{ fontSize: "11px", color: theme.textLight }}>
               With duas and love,
             </p>
             <p
@@ -225,7 +238,7 @@ export function IvoryBlushCard({ order }: Props) {
               style={{
                 fontFamily: '"Cormorant Garamond", serif',
                 fontSize: "15px",
-                color: "#4B3A2A",
+                color: theme.textDark,
               }}
             >
               The families of {order.groom} &amp; {order.bride}
@@ -237,14 +250,14 @@ export function IvoryBlushCard({ order }: Props) {
         <footer className="text-center px-4 pb-4 pt-2">
           <div
             className="h-px mb-5"
-            style={{ background: "linear-gradient(to right, transparent, rgba(203,164,106,0.3), transparent)" }}
+            style={{ background: `linear-gradient(to right, transparent, ${theme.mosqueTint}0.3), transparent)` }}
             aria-hidden="true"
           />
-          <p style={{ fontSize: "11px", color: "#85705C" }}>
+          <p style={{ fontSize: "11px", color: theme.textLight }}>
             Crafted with love by{" "}
             <a
               href="https://shaadi.axonstack.in/"
-              style={{ color: "#CBA46A", textDecoration: "none" }}
+              style={{ color: theme.gold, textDecoration: "none" }}
             >
               axonstack — Shaadi Cards
             </a>
@@ -264,5 +277,13 @@ export function IvoryBlushCard({ order }: Props) {
       />
       </motion.div>
     </div>
+  );
+}
+
+export function IvoryBlushCard({ order }: Props) {
+  return (
+    <ThemeProvider>
+      <IvoryBlushCardInner order={order} />
+    </ThemeProvider>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { useTheme } from "./ThemeContext";
 
 interface TimeLeft {
   days: number;
@@ -26,6 +27,7 @@ interface CountdownCardProps {
 }
 
 export function CountdownCard({ targetDateIso }: CountdownCardProps) {
+  const { theme } = useTheme();
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0, hours: 0, minutes: 0, seconds: 0,
   });
@@ -56,7 +58,7 @@ export function CountdownCard({ targetDateIso }: CountdownCardProps) {
       <div className="ib-glass p-5">
         <p
           className="text-center mb-4 font-semibold tracking-[0.18em] uppercase text-xs"
-          style={{ color: "#85705C" }}
+          style={{ color: theme.textLight }}
         >
           Counting Down To
         </p>
@@ -67,7 +69,7 @@ export function CountdownCard({ targetDateIso }: CountdownCardProps) {
                 className="font-semibold tabular-nums leading-none"
                 style={{
                   fontSize: "clamp(28px, 8vw, 42px)",
-                  color: "#4B3A2A",
+                  color: theme.textDark,
                   fontFamily: '"Cormorant Garamond", "Bodoni Moda", serif',
                 }}
                 aria-label={`${unit.value} ${unit.label.toLowerCase()}`}
@@ -76,7 +78,7 @@ export function CountdownCard({ targetDateIso }: CountdownCardProps) {
               </div>
               <div
                 className="mt-1 tracking-[0.15em] uppercase font-medium"
-                style={{ fontSize: "9px", color: "#85705C" }}
+                style={{ fontSize: "9px", color: theme.textLight }}
               >
                 {unit.label}
               </div>

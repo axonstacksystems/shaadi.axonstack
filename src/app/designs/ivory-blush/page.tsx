@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 const demoOrder = {
   slug: "demo-ivory-blush",
   templateSlug: "ivory-blush" as const,
-  title: "Muhammed Ashik & Fathima",
+  title: "Muhammed Ashik & Abia Manal",
   deliveredOn: "2026-06-24",
-  bride: "Fathima",
+  bride: "Abia Manal",
   groom: "Muhammed Ashik",
   groomParents: "Son of Mr. Abdul Rahman",
   brideParents: "Daughter of Mr. Ibrahim Kutty",
@@ -23,11 +23,11 @@ const demoOrder = {
     "بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
   closingDua:
     "May Allah bless you both, and shower His blessings upon you, and unite you in goodness.",
-  eventDateIso: "2026-12-15T11:00:00+05:30",
+  eventDateIso: "2026-07-19T11:00:00+05:30",
   primaryEvent: {
     label: "NIKAH CEREMONY",
-    date: "Tuesday, 15th December 2026",
-    hijriDate: "24 Jumada al-Ula 1448 AH",
+    date: "Sunday, 19th July 2026",
+    hijriDate: "24 Muharram 1448 AH",
     time: "11:00 AM",
     venue: "Noor Mahal Convention Centre",
     venueAddress: "Malappuram, Kerala",
@@ -64,7 +64,7 @@ const demoOrder = {
   rsvpWhatsApp: "918985798572",
   rsvp: {
     webhookUrl: "",
-    deadline: "10th December 2026",
+    deadline: "10th July 2026",
     maxGuests: 5,
   },
 };

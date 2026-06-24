@@ -1,32 +1,34 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useTheme } from "./ThemeContext";
 
 interface FamilyCardProps {
   groomFamily: string;
   brideFamily: string;
 }
 
-function CenterOrnament() {
+function CenterOrnament({ petalPrimary, gold, dividerColor }: { petalPrimary: string; gold: string; dividerColor: string }) {
   return (
     <div className="flex flex-col items-center justify-center px-3" aria-hidden="true">
       <svg width="32" height="80" viewBox="0 0 32 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <line x1="16" y1="0" x2="16" y2="28" stroke="#D9B67A" strokeWidth="1" opacity="0.5"/>
-        <circle cx="16" cy="16" r="3" fill="#D9B67A" opacity="0.6"/>
+        <line x1="16" y1="0" x2="16" y2="28" stroke={dividerColor} strokeWidth="1" opacity="0.5"/>
+        <circle cx="16" cy="16" r="3" fill={dividerColor} opacity="0.6"/>
         {/* Floral center */}
-        <ellipse cx="16" cy="40" rx="4" ry="6" fill="#E8C6C1" opacity="0.8"/>
-        <ellipse cx="16" cy="40" rx="3" ry="4.5" fill="#E8C6C1" opacity="0.9" transform="rotate(60 16 40)"/>
-        <ellipse cx="16" cy="40" rx="3" ry="4.5" fill="#E8C6C1" opacity="0.9" transform="rotate(-60 16 40)"/>
-        <circle cx="16" cy="40" r="2.5" fill="#CBA46A" opacity="0.9"/>
-        <circle cx="16" cy="40" r="1.2" fill="#D9B67A"/>
-        <line x1="16" y1="52" x2="16" y2="80" stroke="#D9B67A" strokeWidth="1" opacity="0.5"/>
-        <circle cx="16" cy="64" r="3" fill="#D9B67A" opacity="0.6"/>
+        <ellipse cx="16" cy="40" rx="4" ry="6" fill={petalPrimary} opacity="0.8"/>
+        <ellipse cx="16" cy="40" rx="3" ry="4.5" fill={petalPrimary} opacity="0.9" transform="rotate(60 16 40)"/>
+        <ellipse cx="16" cy="40" rx="3" ry="4.5" fill={petalPrimary} opacity="0.9" transform="rotate(-60 16 40)"/>
+        <circle cx="16" cy="40" r="2.5" fill={gold} opacity="0.9"/>
+        <circle cx="16" cy="40" r="1.2" fill={dividerColor}/>
+        <line x1="16" y1="52" x2="16" y2="80" stroke={dividerColor} strokeWidth="1" opacity="0.5"/>
+        <circle cx="16" cy="64" r="3" fill={dividerColor} opacity="0.6"/>
       </svg>
     </div>
   );
 }
 
 export function FamilyCard({ groomFamily, brideFamily }: FamilyCardProps) {
+  const { theme } = useTheme();
   return (
     <motion.section
       initial={{ opacity: 0, y: 24 }}
@@ -39,7 +41,7 @@ export function FamilyCard({ groomFamily, brideFamily }: FamilyCardProps) {
       <div className="ib-glass p-5">
         <p
           className="text-center mb-5 font-semibold tracking-[0.15em] uppercase"
-          style={{ fontSize: "9px", color: "#85705C" }}
+          style={{ fontSize: "9px", color: theme.textLight }}
         >
           With The Blessings Of Our Families
         </p>
@@ -57,20 +59,20 @@ export function FamilyCard({ groomFamily, brideFamily }: FamilyCardProps) {
               style={{
                 fontFamily: '"Cormorant Garamond", serif',
                 fontSize: "clamp(13px, 3.8vw, 16px)",
-                color: "#4B3A2A",
+                color: theme.textDark,
               }}
             >
               {groomFamily}
             </p>
             <p
               className="mt-1 italic"
-              style={{ fontSize: "11px", color: "#85705C" }}
+              style={{ fontSize: "11px", color: theme.textLight }}
             >
               &amp; Family
             </p>
           </motion.div>
 
-          <CenterOrnament />
+          <CenterOrnament petalPrimary={theme.petalPrimary} gold={theme.gold} dividerColor={theme.dividerColor} />
 
           {/* Bride family */}
           <motion.div
@@ -85,14 +87,14 @@ export function FamilyCard({ groomFamily, brideFamily }: FamilyCardProps) {
               style={{
                 fontFamily: '"Cormorant Garamond", serif',
                 fontSize: "clamp(13px, 3.8vw, 16px)",
-                color: "#4B3A2A",
+                color: theme.textDark,
               }}
             >
               {brideFamily}
             </p>
             <p
               className="mt-1 italic"
-              style={{ fontSize: "11px", color: "#85705C" }}
+              style={{ fontSize: "11px", color: theme.textLight }}
             >
               &amp; Family
             </p>

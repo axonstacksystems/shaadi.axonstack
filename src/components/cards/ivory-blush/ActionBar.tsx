@@ -1,6 +1,7 @@
 "use client";
 
 import { MapPin, Mail, CalendarPlus } from "lucide-react";
+import { useTheme } from "./ThemeContext";
 
 interface ActionBarProps {
   mapsUrl: string;
@@ -66,6 +67,7 @@ export function ActionBar({
   venueAddress,
   onRSVP,
 }: ActionBarProps) {
+  const { theme } = useTheme();
   function handleCalendar() {
     const ics = generateICS(groom, bride, eventDateIso, venue, venueAddress);
     downloadICS(ics, `nikah-${groom.toLowerCase()}-${bride.toLowerCase()}.ics`);
@@ -75,7 +77,7 @@ export function ActionBar({
     <div
       className="sticky bottom-0 z-30 px-4 py-3"
       style={{
-        background: "rgba(251,248,244,0.85)",
+        background: theme.glassBg,
         backdropFilter: "blur(24px)",
         WebkitBackdropFilter: "blur(24px)",
         borderTop: "1px solid rgba(255,255,255,0.7)",
@@ -93,12 +95,12 @@ export function ActionBar({
           className="flex-1 flex flex-col items-center gap-1 py-2.5 rounded-2xl transition-all active:scale-95"
           style={{
             background: "rgba(255,255,255,0.8)",
-            border: "1px solid rgba(203,164,106,0.2)",
+            border: `1px solid ${theme.mosqueTint}0.2)`,
           }}
           aria-label="View venue location on map"
         >
-          <MapPin size={18} style={{ color: "#CBA46A" }} aria-hidden="true" />
-          <span style={{ fontSize: "10px", color: "#85705C", fontWeight: 500 }}>
+          <MapPin size={18} style={{ color: theme.gold }} aria-hidden="true" />
+          <span style={{ fontSize: "10px", color: theme.textLight, fontWeight: 500 }}>
             View Location
           </span>
         </a>
@@ -108,7 +110,7 @@ export function ActionBar({
           onClick={onRSVP}
           className="flex-1 flex flex-col items-center gap-1 py-2.5 rounded-2xl transition-all active:scale-95"
           style={{
-            background: "linear-gradient(135deg,#CBA46A,#B99054)",
+            background: theme.buttonCircleBg,
             border: "none",
           }}
           aria-label="Open RSVP form"
@@ -125,12 +127,12 @@ export function ActionBar({
           className="flex-1 flex flex-col items-center gap-1 py-2.5 rounded-2xl transition-all active:scale-95"
           style={{
             background: "rgba(255,255,255,0.8)",
-            border: "1px solid rgba(203,164,106,0.2)",
+            border: `1px solid ${theme.mosqueTint}0.2)`,
           }}
           aria-label="Add event to calendar"
         >
-          <CalendarPlus size={18} style={{ color: "#CBA46A" }} aria-hidden="true" />
-          <span style={{ fontSize: "10px", color: "#85705C", fontWeight: 500 }}>
+          <CalendarPlus size={18} style={{ color: theme.gold }} aria-hidden="true" />
+          <span style={{ fontSize: "10px", color: theme.textLight, fontWeight: 500 }}>
             Add to Calendar
           </span>
         </button>

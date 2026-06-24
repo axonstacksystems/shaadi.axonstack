@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { Users, Heart, UtensilsCrossed, Camera, Sparkles } from "lucide-react";
+import { useTheme } from "./ThemeContext";
 
 const STEPS = [
   { label: "Guest Arrival", Icon: Users },
@@ -12,6 +13,7 @@ const STEPS = [
 ];
 
 export function Timeline() {
+  const { theme } = useTheme();
   return (
     <motion.section
       initial={{ opacity: 0, y: 24 }}
@@ -24,7 +26,7 @@ export function Timeline() {
       <div className="ib-glass p-5">
         <p
           className="text-center mb-5 font-semibold tracking-[0.18em] uppercase text-xs"
-          style={{ color: "#85705C" }}
+          style={{ color: theme.textLight }}
         >
           Timeline
         </p>
@@ -33,7 +35,7 @@ export function Timeline() {
           <div
             className="absolute top-[18px] left-0 right-0 h-px z-0"
             style={{
-              background: "linear-gradient(to right, transparent, #D9B67A 15%, #D9B67A 85%, transparent)",
+              background: `linear-gradient(to right, transparent, ${theme.dividerColor} 15%, ${theme.dividerColor} 85%, transparent)`,
             }}
             aria-hidden="true"
           />
@@ -55,27 +57,27 @@ export function Timeline() {
                   style={
                     isActive
                       ? {
-                          background: "linear-gradient(135deg, #E8C6C1, #D8A9A2)",
+                          background: `linear-gradient(135deg, ${theme.petalPrimary}, ${theme.petalSecondary})`,
                           border: "2px solid rgba(255,255,255,0.9)",
-                          boxShadow: "0 4px 12px rgba(216,169,162,0.4)",
+                          boxShadow: `0 4px 12px ${theme.mosqueTint}0.35)`,
                         }
                       : {
                           background: "rgba(255,255,255,0.9)",
-                          border: "1.5px solid rgba(203,164,106,0.35)",
+                          border: `1.5px solid ${theme.mosqueTint}0.35)`,
                         }
                   }
                   aria-hidden="true"
                 >
                   <Icon
                     size={15}
-                    style={{ color: isActive ? "#fff" : "#CBA46A" }}
+                    style={{ color: isActive ? "#fff" : theme.gold }}
                   />
                 </div>
                 <p
                   className="text-center font-medium leading-tight"
                   style={{
                     fontSize: "9px",
-                    color: isActive ? "#D8A9A2" : "#85705C",
+                    color: isActive ? theme.petalSecondary : theme.textLight,
                     maxWidth: "52px",
                   }}
                 >
