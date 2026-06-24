@@ -12,8 +12,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = THEMES[theme];
   if (!t) return {};
   return {
-    title: `Ivory Blush — ${t.label} Preview`,
-    description: `Luxury Islamic Nikah invitation in the ${t.label} palette, by Shaadi Cards.`,
+    title: `${t.label} — Nikah Invitation Template`,
+    description: `Luxury Islamic Nikah invitation in the ${t.label} palette. Beautifully designed, fully digital. Get it for ₹999 — 50% off. By Shaadi Cards.`,
+    openGraph: {
+      title: `${t.label} — Nikah Invitation Template`,
+      description: `Luxury Islamic Nikah invitation · ${t.label} · ₹999 only (50% OFF) · Shaadi Cards`,
+      type: "website",
+      siteName: "Shaadi Cards",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${t.label} — Nikah Invitation Template`,
+      description: `Luxury Islamic Nikah invitation · ${t.label} · ₹999 only (50% OFF) · Shaadi Cards`,
+    },
   };
 }
 

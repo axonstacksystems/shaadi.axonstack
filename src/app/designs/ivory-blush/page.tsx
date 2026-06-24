@@ -2,9 +2,20 @@ import type { Metadata } from "next";
 import { IvoryBlushCard } from "@/components/cards/IvoryBlushCard";
 
 export const metadata: Metadata = {
-  title: "Ivory Blush — Template Preview",
+  title: "Ivory Blush — Nikah Invitation Template",
   description:
-    "A luxury glassmorphism Islamic Nikah invitation in champagne ivory and blush rose, by Shaadi Cards.",
+    "A luxury Islamic Nikah invitation in champagne ivory & blush rose. Beautifully designed, fully digital. Get it for ₹999 — 50% off.",
+  openGraph: {
+    title: "Ivory Blush — Nikah Invitation Template",
+    description: "Luxury Islamic Nikah invitation · Champagne Ivory & Blush Rose · ₹999 only (50% OFF) · Shaadi Cards",
+    type: "website",
+    siteName: "Shaadi Cards",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ivory Blush — Nikah Invitation Template",
+    description: "Luxury Islamic Nikah invitation · ₹999 only (50% OFF) · Shaadi Cards",
+  },
 };
 
 const demoOrder = {
