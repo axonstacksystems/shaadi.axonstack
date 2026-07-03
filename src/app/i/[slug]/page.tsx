@@ -43,7 +43,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title,
     description,
-    robots: { index: false, follow: false },
     alternates: { canonical: url },
     openGraph: {
       type: "website",
@@ -52,12 +51,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "Shaadi Cards by axonstack",
       title: `${order.title} · Wedding Invitation`,
       description,
+      images: [
+        {
+          url: `${url}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: `${order.title} — ${order.ceremonyHeadline} Invitation`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
       title: `${order.title} · Wedding Invitation`,
       description,
       creator: "@axonstack",
+      images: [`${url}/opengraph-image`],
     },
   };
 }
