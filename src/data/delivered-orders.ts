@@ -57,6 +57,8 @@ export interface DeliveredOrder {
     /** Short first-name-only versions for OG previews and compact UI */
     groomShort?: string;
     brideShort?: string;
+    /** Optional static image path to use as the social preview instead of generating OG image */
+    previewImage?: string;
     /** Optional host/parent lines. Muslim invitations are traditionally
      * issued by the families, so these appear under each name when set,
      * e.g. "Son of Mr. & Mrs. Abdul Rahman". */
@@ -409,6 +411,7 @@ export const deliveredOrders: DeliveredOrder[] = [
         groom: "Muhammed Ashik",
         groomShort: "Ashik",
         brideShort: "Abia",
+        previewImage: "/og/ashik-abia.png",
         groomParents: "Son of Mr. Ashraf",
         brideParents: "Daughter of Mr. Ismayil",
         invitationLine:

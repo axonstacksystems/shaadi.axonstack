@@ -23,6 +23,13 @@ export default async function OgImage({ params }: Props) {
   const order = getDeliveredOrderBySlug(slug);
   if (!order) return new Response("Not found", { status: 404 });
 
+  if (order.previewImage) {
+    return new Response(null, {
+      status: 302,
+      headers: { Location: order.previewImage },
+    });
+  }
+
   const designEntry = getDesign(order.designSlug)!;
   const themeEntry =
     getDesignTheme(order.designSlug, order.themeSlug) ?? designEntry.themes[0];

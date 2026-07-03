@@ -39,6 +39,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const url = `https://shaadi.axonstack.in/i/${slug}`;
   const title = `${order.title} — Wedding Invitation`;
   const description = `${order.invitationLine}. You're invited to ${order.groom} & ${order.bride}'s ${order.ceremonyHeadline} on ${order.primaryEvent.date} at ${order.primaryEvent.venue}.`;
+  const imageUrl = order.previewImage
+    ? `${order.previewImage}`
+    : `${url}/opengraph-image`;
 
   return {
     title,
@@ -53,8 +56,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       images: [
         {
-          url: `${url}/opengraph-image`,
-          secureUrl: `${url}/opengraph-image`,
+          url: imageUrl,
+          secureUrl: imageUrl,
           width: 1200,
           height: 630,
           alt: `${order.title} — ${order.ceremonyHeadline} Invitation`,
@@ -67,7 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: `${order.title} · Wedding Invitation`,
       description,
       creator: "@axonstack",
-      images: [`${url}/opengraph-image`],
+      images: [imageUrl],
     },
   };
 }
