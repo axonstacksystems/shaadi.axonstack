@@ -324,145 +324,56 @@ export function generateOrderOGImage(
             zIndex: 10,
           }}
         >
-          {/* Bismillah */}
+          {/* Names — Ashik & Abia */}
           <div
             style={{
-              fontSize: 20,
-              color: goldColor,
-              letterSpacing: "0.1em",
-              opacity: 0.6,
-              display: "flex",
-              marginBottom: 4,
-              fontStyle: "italic",
-            }}
-          >
-            Bismillah
-          </div>
-
-          {/* Gold hairline separator */}
-          <div
-            style={{
-              width: 90,
-              height: 1,
-              background: `linear-gradient(to right, transparent, ${goldColor}, transparent)`,
-              display: "flex",
-              marginBottom: 24,
-            }}
-          />
-
-          {/* Groom name */}
-          <div
-            style={{
-              fontSize: 80,
+              fontSize: 110,
               fontWeight: 600,
               color: textDark,
-              letterSpacing: "-0.01em",
+              letterSpacing: "-0.02em",
               lineHeight: 1.05,
               display: "flex",
+              alignItems: "center",
+              gap: 24,
             }}
           >
             {order.groomShort ?? order.groom}
-          </div>
-
-          {/* Ampersand */}
-          <div
-            style={{
-              fontSize: 32,
-              fontWeight: 200,
-              fontStyle: "italic",
-              color: petalColor,
-              letterSpacing: "0.18em",
-              margin: "8px 0",
-              display: "flex",
-            }}
-          >
-            &amp;
-          </div>
-
-          {/* Bride name */}
-          <div
-            style={{
-              fontSize: 80,
-              fontWeight: 600,
-              color: textDark,
-              letterSpacing: "-0.01em",
-              lineHeight: 1.05,
-              display: "flex",
-              marginBottom: 24,
-            }}
-          >
+            <span style={{ fontSize: 48, fontWeight: 200, fontStyle: "italic", color: petalColor, letterSpacing: "0.1em", display: "flex" }}>
+              &amp;
+            </span>
             {order.brideShort ?? order.bride}
           </div>
 
-          {/* Ornament — double diamond with center dot */}
+          {/* Ornament separator */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 6,
-              marginBottom: 14,
+              gap: 8,
+              marginTop: 28,
+              marginBottom: 28,
             }}
           >
-            <div style={{ width: 70, height: 1, background: `linear-gradient(to right, transparent, ${goldColor})`, display: "flex" }} />
+            <div style={{ width: 80, height: 1, background: `linear-gradient(to right, transparent, ${goldColor})`, display: "flex" }} />
             <div style={{ width: 8, height: 8, background: goldColor, transform: "rotate(45deg)", display: "flex" }} />
             <div style={{ width: 5, height: 5, background: goldColor, borderRadius: "50%", display: "flex" }} />
             <div style={{ width: 8, height: 8, background: goldColor, transform: "rotate(45deg)", display: "flex" }} />
-            <div style={{ width: 70, height: 1, background: `linear-gradient(to left, transparent, ${goldColor})`, display: "flex" }} />
+            <div style={{ width: 80, height: 1, background: `linear-gradient(to left, transparent, ${goldColor})`, display: "flex" }} />
           </div>
 
-          {/* Invitation copy — single line for thumbnail readability */}
+          {/* Wedding Invitation */}
           <div
             style={{
-              fontSize: 19,
-              color: textDark,
-              opacity: 0.7,
-              fontStyle: "italic",
-              textAlign: "center",
-              lineHeight: 1.5,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ display: "flex" }}>Together with their families, request the honor of your presence</div>
-            <div style={{ display: "flex" }}>
-              at their{" "}
-              <span style={{ fontStyle: "normal", fontWeight: 600, color: textDark, opacity: 1 }}>
-                {order.ceremonyHeadline}
-              </span>
-            </div>
-          </div>
-
-          {/* Date */}
-          <div
-            style={{
-              fontSize: 15,
+              fontSize: 36,
               color: goldColor,
-              letterSpacing: "0.22em",
+              letterSpacing: "0.3em",
               textTransform: "uppercase",
-              fontWeight: 600,
-              marginTop: 14,
+              fontWeight: 500,
               display: "flex",
             }}
           >
-            {order.primaryEvent.date}
+            Wedding Invitation
           </div>
-
-          {/* Venue */}
-          {order.primaryEvent.venue ? (
-            <div
-              style={{
-                fontSize: 15,
-                color: textDark,
-                opacity: 0.55,
-                textAlign: "center",
-                marginTop: 6,
-                display: "flex",
-              }}
-            >
-              {order.primaryEvent.venue}
-            </div>
-          ) : null}
         </div>
 
         {/* Bottom branding — removed, WhatsApp shows title/description below image */}
