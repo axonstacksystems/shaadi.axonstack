@@ -58,6 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           width: 1200,
           height: 630,
           alt: `${order.title} — ${order.ceremonyHeadline} Invitation`,
+          type: "image/png",
         },
       ],
     },

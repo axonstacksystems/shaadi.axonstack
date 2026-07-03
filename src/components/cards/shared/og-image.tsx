@@ -327,16 +327,16 @@ export function generateOrderOGImage(
           {/* Bismillah */}
           <div
             style={{
-              fontSize: 22,
+              fontSize: 20,
               color: goldColor,
-              letterSpacing: "0.08em",
-              opacity: 0.65,
+              letterSpacing: "0.1em",
+              opacity: 0.6,
               display: "flex",
-              marginBottom: 6,
+              marginBottom: 4,
               fontStyle: "italic",
             }}
           >
-            Bismillah ir-Rahman ir-Rahim
+            Bismillah
           </div>
 
           {/* Gold hairline separator */}
@@ -410,22 +410,21 @@ export function generateOrderOGImage(
             <div style={{ width: 70, height: 1, background: `linear-gradient(to left, transparent, ${goldColor})`, display: "flex" }} />
           </div>
 
-          {/* Invitation copy */}
+          {/* Invitation copy — single line for thumbnail readability */}
           <div
             style={{
-              fontSize: 17,
+              fontSize: 19,
               color: textDark,
-              opacity: 0.75,
+              opacity: 0.7,
               fontStyle: "italic",
               textAlign: "center",
-              lineHeight: 1.65,
+              lineHeight: 1.5,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            <div style={{ display: "flex" }}>Together with their families,</div>
-            <div style={{ display: "flex" }}>request the honor of your presence</div>
+            <div style={{ display: "flex" }}>Together with their families, request the honor of your presence</div>
             <div style={{ display: "flex" }}>
               at their{" "}
               <span style={{ fontStyle: "normal", fontWeight: 600, color: textDark, opacity: 1 }}>
@@ -466,23 +465,7 @@ export function generateOrderOGImage(
           ) : null}
         </div>
 
-        {/* Bottom branding */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 20,
-            left: 0,
-            right: 0,
-            display: "flex",
-            justifyContent: "center",
-            fontSize: 11,
-            color: textDark,
-            opacity: 0.25,
-            letterSpacing: "0.1em",
-          }}
-        >
-          Shaadi Cards · by axonstack
-        </div>
+        {/* Bottom branding — removed, WhatsApp shows title/description below image */}
       </div>
     ),
     { ...OG_SIZE },
