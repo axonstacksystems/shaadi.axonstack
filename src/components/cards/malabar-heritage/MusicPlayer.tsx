@@ -8,34 +8,15 @@ import { useTheme } from "./ThemeContext";
 interface MusicPlayerProps {
   audioUrl: string;
   startPlaying?: boolean;
-  audioElement?: HTMLAudioElement | null;
 }
 
-export function MusicPlayer({ audioUrl, startPlaying = false, audioElement }: MusicPlayerProps) {
+export function MusicPlayer({ audioUrl, startPlaying = false }: MusicPlayerProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const { theme } = useTheme();
 
   useEffect(() => {
-    // Use pre-created audio element (already playing from user gesture)
-    if (audioElement) {
-      audioRef.current = audioElement;
-      setIsReady(true);
-      setIsPlaying(!audioElement.paused && !audioElement.ended);
-
-      const onPlay = () => setIsPlaying(true);
-      const onPause = () => setIsPlaying(false);
-      audioElement.addEventListener("play", onPlay);
-      audioElement.addEventListener("pause", onPause);
-
-      return () => {
-        audioElement.removeEventListener("play", onPlay);
-        audioElement.removeEventListener("pause", onPause);
-      };
-    }
-
-    // Create new audio element
     const audio = new Audio(audioUrl);
     audio.loop = true;
     audio.volume = 0.4;
@@ -50,16 +31,16 @@ export function MusicPlayer({ audioUrl, startPlaying = false, audioElement }: Mu
       audio.removeEventListener("canplaythrough", onCanPlay);
       audioRef.current = null;
     };
-  }, [audioUrl, audioElement]);
+  }, [audioUrl]);
 
   useEffect(() => {
-    if (startPlaying && isReady && audioRef.current && !audioElement) {
+    if (startPlaying && isReady && audioRef.current) {
       audioRef.current
         .play()
         .then(() => setIsPlaying(true))
         .catch(() => {});
     }
-  }, [startPlaying, isReady, audioElement]);
+  }, [startPlaying, isReady]);
 
   function togglePlay() {
     const audio = audioRef.current;
@@ -120,7 +101,6 @@ export function MusicPlayer({ audioUrl, startPlaying = false, audioElement }: Mu
         )}
       </AnimatePresence>
 
-      {/* Equalizer bars when playing */}
       {isPlaying && (
         <div className="absolute bottom-0 left-0 right-0 flex items-end justify-center gap-[2px]" style={{ height: 6, pointerEvents: "none" }}>
           {[0, 1, 2, 3].map((i) => (

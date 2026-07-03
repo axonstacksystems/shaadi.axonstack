@@ -26,9 +26,19 @@ interface Props {
 function PetalAtelierCardInner({ order, showToolbar }: Props) {
   const { theme } = useTheme();
   const rsvpRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [showCover, setShowCover] = useState(true);
 
   function handleOpen() {
+    // Create and start audio within the user gesture to satisfy autoplay policies
+    if (!audioRef.current) {
+      const audio = new Audio("/music/nasheed.mp3");
+      audio.loop = true;
+      audio.volume = 0.4;
+      audioRef.current = audio;
+    }
+    audioRef.current.play().catch(() => {});
+
     setShowCover(false);
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0, behavior: "instant" });
@@ -296,6 +306,7 @@ function PetalAtelierCardInner({ order, showToolbar }: Props) {
         <MusicPlayer
           audioUrl="/music/nasheed.mp3"
           startPlaying
+          audioElement={audioRef.current}
         />
       )}
     </div>

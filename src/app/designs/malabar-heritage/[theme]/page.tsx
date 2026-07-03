@@ -39,5 +39,5 @@ export function generateStaticParams() {
 export default async function MalabarHeritageThemePage({ params }: Props) {
   const { theme } = await params;
   if (!isValidTheme(DESIGN_SLUG, theme)) notFound();
-  return <MalabarHeritageCard order={MALABAR_HERITAGE_DEMO} />;
+  return <MalabarHeritageCard order={MALABAR_HERITAGE_DEMO} initialTheme={theme} showToolbar />;
 }
