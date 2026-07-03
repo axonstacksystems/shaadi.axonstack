@@ -4,15 +4,21 @@ import { motion } from "motion/react";
 import { Users, Heart, UtensilsCrossed, Camera, Sparkles } from "lucide-react";
 import { useTheme } from "./ThemeContext";
 
-const STEPS = [
-  { label: "Guest Arrival", Icon: Users },
-  { label: "Nikah Ceremony", Icon: Heart },
-  { label: "Lunch", Icon: UtensilsCrossed },
-  { label: "Photos", Icon: Camera },
-  { label: "Walima Reception", Icon: Sparkles },
-];
+const ICON_MAP: Record<string, typeof Users> = {
+  "Guest Arrival": Users,
+  "Nikah Ceremony": Heart,
+  "Nikah": Heart,
+  "Lunch": UtensilsCrossed,
+  "Photos": Camera,
+  "Wedding Reception": Sparkles,
+  "Reception": Sparkles,
+  "Wedding Ceremony": Heart,
+  "Wedding Lunch": UtensilsCrossed,
+};
 
-export function Timeline() {
+const DEFAULT_ICON = Sparkles;
+
+export function Timeline({ steps = [] }: { steps?: string[] }) {
   const { theme } = useTheme();
   return (
     <motion.section
@@ -40,12 +46,12 @@ export function Timeline() {
             aria-hidden="true"
           />
 
-          {STEPS.map((step, i) => {
-            const isActive = i === 1; // Nikah is highlighted
-            const { Icon } = step;
+          {steps.map((label, i) => {
+            const isActive = i === 1;
+            const Icon = ICON_MAP[label] ?? DEFAULT_ICON;
             return (
               <motion.div
-                key={step.label}
+                key={label}
                 initial={{ opacity: 0, scale: 0.7 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -73,16 +79,16 @@ export function Timeline() {
                     style={{ color: isActive ? "#fff" : theme.gold }}
                   />
                 </div>
-                <p
-                  className="text-center font-medium leading-tight"
-                  style={{
-                    fontSize: "9px",
-                    color: isActive ? theme.petalSecondary : theme.textLight,
-                    maxWidth: "52px",
-                  }}
-                >
-                  {step.label}
-                </p>
+                  <p
+                    className="text-center font-medium leading-tight"
+                    style={{
+                      fontSize: "9px",
+                      color: isActive ? theme.petalSecondary : theme.textLight,
+                      maxWidth: "52px",
+                    }}
+                  >
+                    {label}
+                  </p>
               </motion.div>
             );
           })}

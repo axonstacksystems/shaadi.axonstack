@@ -7,6 +7,7 @@ interface ActionBarProps {
   mapsUrl: string;
   groom: string;
   bride: string;
+  ceremonyHeadline: string;
   eventDateIso: string;
   venue: string;
   venueAddress: string;
@@ -16,6 +17,7 @@ interface ActionBarProps {
 function generateICS(
   groom: string,
   bride: string,
+  ceremonyHeadline: string,
   eventDateIso: string,
   venue: string,
   venueAddress: string
@@ -32,15 +34,15 @@ function generateICS(
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Shaadi Cards//Ivory Blush//EN",
+    "PRODID:-//Shaadi Cards//axonstack//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH",
     "BEGIN:VEVENT",
     `DTSTART:${fmt(start)}`,
     `DTEND:${fmt(end)}`,
-    `SUMMARY:Nikah of ${groom} & ${bride}`,
+    `SUMMARY:${ceremonyHeadline} of ${groom} & ${bride}`,
     `LOCATION:${venue}\\, ${venueAddress}`,
-    `DESCRIPTION:You are cordially invited to the Nikah ceremony of ${groom} and ${bride}.`,
+    `DESCRIPTION:You are cordially invited to the ${ceremonyHeadline} ceremony of ${groom} and ${bride}.`,
     `UID:${Date.now()}@shaadi.axonstack.in`,
     "STATUS:CONFIRMED",
     "END:VEVENT",
@@ -62,6 +64,7 @@ export function ActionBar({
   mapsUrl,
   groom,
   bride,
+  ceremonyHeadline,
   eventDateIso,
   venue,
   venueAddress,
@@ -69,8 +72,8 @@ export function ActionBar({
 }: ActionBarProps) {
   const { theme } = useTheme();
   function handleCalendar() {
-    const ics = generateICS(groom, bride, eventDateIso, venue, venueAddress);
-    downloadICS(ics, `nikah-${groom.toLowerCase()}-${bride.toLowerCase()}.ics`);
+    const ics = generateICS(groom, bride, ceremonyHeadline, eventDateIso, venue, venueAddress);
+    downloadICS(ics, `${ceremonyHeadline.toLowerCase().replace(/\s+/g, "-")}-${groom.toLowerCase()}-${bride.toLowerCase()}.ics`);
   }
 
   return (
@@ -113,11 +116,11 @@ export function ActionBar({
             background: theme.buttonCircleBg,
             border: "none",
           }}
-          aria-label="Open RSVP form"
+          aria-label="Open presence confirmation form"
         >
           <Mail size={18} style={{ color: "#fff" }} aria-hidden="true" />
           <span style={{ fontSize: "10px", color: "#fff", fontWeight: 600 }}>
-            RSVP
+            Confirm
           </span>
         </button>
 

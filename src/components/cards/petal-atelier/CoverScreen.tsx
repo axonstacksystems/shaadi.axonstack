@@ -11,6 +11,10 @@ import { PreviewToolbar } from "./PreviewToolbar";
 interface CoverScreenProps {
   groom: string;
   bride: string;
+  date: string;
+  ceremonyHeadline: string;
+  rsvpWhatsApp: string;
+  showToolbar?: boolean;
   onOpen: () => void;
 }
 
@@ -336,7 +340,7 @@ function Petals({ list, petalColor, goldColor }: { list: Petal[]; petalColor: st
 /* ─────────────────────────────────────────────────────────────
    Main export
 ───────────────────────────────────────────────────────────── */
-export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
+export function CoverScreen({ groom, bride, date, ceremonyHeadline, rsvpWhatsApp, showToolbar = false, onOpen }: CoverScreenProps) {
   const petals = usePetals(16);
   const uid = useId().replace(/:/g,"");
   const { theme, themeId } = useTheme();
@@ -349,11 +353,48 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
     router.push(`${base}/${nextThemeId}`);
   }
 
+  // Swipe-up + scroll-down gesture to open invitation
+  useEffect(() => {
+    let startY = 0;
+    let startTime = 0;
+
+    function onTouchStart(e: TouchEvent) {
+      startY = e.touches[0].clientY;
+      startTime = Date.now();
+    }
+
+    function onTouchEnd(e: TouchEvent) {
+      const endY = e.changedTouches[0].clientY;
+      const deltaY = startY - endY;
+      const deltaT = Date.now() - startTime;
+      // Swipe up (negative deltaY = finger moved up) with threshold
+      if (deltaY > 50 && deltaT < 800) {
+        onOpen();
+      }
+    }
+
+    function onWheel(e: WheelEvent) {
+      if (e.deltaY > 30) {
+        onOpen();
+      }
+    }
+
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("wheel", onWheel, { passive: true });
+
+    return () => {
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("wheel", onWheel);
+    };
+  }, [onOpen]);
+
   return (
     <div
       className="relative overflow-hidden select-none"
       style={{ height:"100dvh", width:"100%", background: theme.coverBg,
-        transition:"background 0.6s ease" }}
+        transition:"background 0.6s ease", touchAction: "pan-y" }}
     >
 
       {/* ═══ LAYER 0 — far background sunlight rays ═══ */}
@@ -539,7 +580,7 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
           >
             Together with their families,<br/>
             request the honor of your presence<br/>
-            at their <strong style={{ fontStyle:"normal", color:theme.textDark }}>Nikah</strong>
+            at their <strong style={{ fontStyle:"normal", color:theme.textDark }}>{ceremonyHeadline}</strong>
           </motion.p>
 
           {/* Date — slim, tracking caps, gold */}
@@ -556,7 +597,7 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
               fontWeight:500,
             }}
           >
-            15 · December · 2026
+            {date}
           </motion.p>
         </div>
       </div>
@@ -660,18 +701,20 @@ export function CoverScreen({ groom, bride, onOpen }: CoverScreenProps) {
         </motion.div>
       </div>
 
-      {/* ═══ LAYER 9 — Draggable preview toolbar ═══ */}
-      <PreviewToolbar
-        accentColor={theme.gold}
-        nextThemeSwatch={nextTheme.swatch}
-        nextThemeLabel={nextTheme.label}
-        nextThemeAriaLabel={`Switch to ${nextTheme.label} theme`}
-        mrp="₹2,000"
-        salePrice="₹999"
-        discountLabel="50% OFF"
-        whatsappHref="https://wa.me/918985798572?text=Hi%2C%20I%27m%20interested%20in%20the%20Ivory%20Blush%20wedding%20invitation%20%E2%80%94%20please%20share%20details!"
-        onThemeSwitch={handleThemeSwitch}
-      />
+      {/* ═══ LAYER 9 — Draggable preview toolbar (demos only) ═══ */}
+      {showToolbar && (
+        <PreviewToolbar
+          accentColor={theme.gold}
+          nextThemeSwatch={nextTheme.swatch}
+          nextThemeLabel={nextTheme.label}
+          nextThemeAriaLabel={`Switch to ${nextTheme.label} theme`}
+          mrp="₹2,000"
+          salePrice="₹999"
+          discountLabel="50% OFF"
+          whatsappHref={`https://wa.me/${rsvpWhatsApp}?text=Hi%2C%20I%27m%20interested%20in%20the%20${encodeURIComponent(theme.label)}%20wedding%20invitation%20%E2%80%94%20please%20share%20details!`}
+          onThemeSwitch={handleThemeSwitch}
+        />
+      )}
 
     </div>
   );

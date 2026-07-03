@@ -39,5 +39,5 @@ export function generateStaticParams() {
 export default async function PetalAtelierThemePage({ params }: Props) {
   const { theme } = await params;
   if (!isValidTheme(DESIGN_SLUG, theme)) notFound();
-  return <PetalAtelierCard order={PETAL_ATELIER_DEMO} initialTheme={theme} />;
+  return <PetalAtelierCard order={PETAL_ATELIER_DEMO} initialTheme={theme} showToolbar />;
 }

@@ -7,7 +7,8 @@ const BASE_RSVP = {
 
 export const PETAL_ATELIER_DEMO: DeliveredOrder = {
   slug: "demo-petal-atelier",
-  templateSlug: "petal-atelier",
+  designSlug: "petal-atelier",
+  themeSlug: "ivory-blush",
   title: "Muhammed Ashik & Abia Manal",
   deliveredOn: "2026-06-24",
   bride: "Abia Manal",
@@ -37,7 +38,7 @@ export const PETAL_ATELIER_DEMO: DeliveredOrder = {
     { time: "11:30 AM", event: "Nikah Ceremony", description: "The sacred union witnessed by family and friends" },
     { time: "1:00 PM", event: "Lunch", description: "Traditional Malabar cuisine served with love" },
     { time: "3:00 PM", event: "Photos", description: "Capturing beautiful moments together" },
-    { time: "7:00 PM", event: "Walima Reception", description: "The marriage feast, in keeping with the Sunnah" },
+    { time: "7:00 PM", event: "Wedding Reception", description: "The marriage feast, in keeping with the Sunnah" },
   ],
   rsvpWhatsApp: "918985798572",
   rsvp: { ...BASE_RSVP, deadline: "10th July 2026" },
@@ -45,7 +46,8 @@ export const PETAL_ATELIER_DEMO: DeliveredOrder = {
 
 export const MALABAR_HERITAGE_DEMO: DeliveredOrder = {
   slug: "demo-malabar",
-  templateSlug: "malabar-heritage",
+  designSlug: "malabar-heritage",
+  themeSlug: "emerald-gold",
   title: "Malabar & Heritage",
   deliveredOn: "2026-06-22",
   bride: "Heritage",
@@ -74,7 +76,7 @@ export const MALABAR_HERITAGE_DEMO: DeliveredOrder = {
   },
   timeline: [
     { time: "10:00 AM", event: "Nikah Ceremony", description: "The sacred union witnessed by family and friends" },
-    { time: "12:00 PM", event: "Walima Reception", description: "The marriage feast, in keeping with the Sunnah" },
+    { time: "12:00 PM", event: "Wedding Reception", description: "The marriage feast, in keeping with the Sunnah" },
   ],
   rsvpWhatsApp: "918985798572",
   rsvp: { ...BASE_RSVP, deadline: "8th September 2026" },
@@ -82,7 +84,8 @@ export const MALABAR_HERITAGE_DEMO: DeliveredOrder = {
 
 export const NOOR_E_NIKAH_DEMO: DeliveredOrder = {
   slug: "demo-noor",
-  templateSlug: "noor-e-nikah",
+  designSlug: "noor-e-nikah",
+  themeSlug: "navy-gold",
   title: "Noor & Nikah",
   deliveredOn: "2026-06-22",
   bride: "Noor",
@@ -111,7 +114,7 @@ export const NOOR_E_NIKAH_DEMO: DeliveredOrder = {
   },
   timeline: [
     { time: "10:00 AM", event: "Nikah Ceremony", description: "The sacred union witnessed by family and friends" },
-    { time: "12:30 PM", event: "Walima Reception", description: "The marriage feast, in keeping with the Sunnah" },
+    { time: "12:30 PM", event: "Wedding Reception", description: "The marriage feast, in keeping with the Sunnah" },
   ],
   rsvpWhatsApp: "918985798572",
   rsvp: { ...BASE_RSVP, deadline: "29th September 2026" },
@@ -119,7 +122,8 @@ export const NOOR_E_NIKAH_DEMO: DeliveredOrder = {
 
 export const CELESTIAL_CANVAS_DEMO: DeliveredOrder = {
   slug: "demo-celestial",
-  templateSlug: "celestial-canvas",
+  designSlug: "celestial-canvas",
+  themeSlug: "indigo-gold",
   title: "Ashik & Abiya",
   deliveredOn: "2026-06-22",
   bride: "Abiya",
@@ -148,7 +152,7 @@ export const CELESTIAL_CANVAS_DEMO: DeliveredOrder = {
   },
   timeline: [
     { time: "10:00 AM", event: "Nikah Ceremony", description: "The sacred union witnessed by family and friends" },
-    { time: "12:00 PM", event: "Walima Reception", description: "The marriage feast, in keeping with the Sunnah" },
+    { time: "12:00 PM", event: "Wedding Reception", description: "The marriage feast, in keeping with the Sunnah" },
   ],
   rsvpWhatsApp: "918985798572",
   rsvp: { ...BASE_RSVP, deadline: "15th July 2026" },
@@ -156,7 +160,8 @@ export const CELESTIAL_CANVAS_DEMO: DeliveredOrder = {
 
 export const NORDIC_MINIMAL_DEMO: DeliveredOrder = {
   slug: "demo-nordic",
-  templateSlug: "nordic-minimal",
+  designSlug: "nordic-minimal",
+  themeSlug: "frost-silver",
   title: "Nordic & Minimal",
   deliveredOn: "2026-06-22",
   bride: "Minimal",
@@ -182,7 +187,7 @@ export const NORDIC_MINIMAL_DEMO: DeliveredOrder = {
   },
   timeline: [
     { time: "3:00 PM", event: "Nikah Ceremony", description: "The sacred union witnessed by family and friends" },
-    { time: "5:00 PM", event: "Walima Reception", description: "The marriage feast, in keeping with the Sunnah" },
+    { time: "5:00 PM", event: "Wedding Reception", description: "The marriage feast, in keeping with the Sunnah" },
   ],
   rsvpWhatsApp: "918985798572",
   rsvp: { ...BASE_RSVP, deadline: "15th December 2026" },
@@ -190,7 +195,8 @@ export const NORDIC_MINIMAL_DEMO: DeliveredOrder = {
 
 export const MUGHAL_MINIATURE_DEMO: DeliveredOrder = {
   slug: "demo-mughal",
-  templateSlug: "mughal-miniature",
+  designSlug: "mughal-miniature",
+  themeSlug: "ruby-gold",
   title: "Mughal & Miniature",
   deliveredOn: "2026-06-22",
   bride: "Miniature",
@@ -217,7 +223,8 @@ export const MUGHAL_MINIATURE_DEMO: DeliveredOrder = {
 
 export const MONSOON_GARDEN_DEMO: DeliveredOrder = {
   slug: "demo-monsoon",
-  templateSlug: "monsoon-garden",
+  designSlug: "monsoon-garden",
+  themeSlug: "green-silver",
   title: "Rahman & Raina",
   deliveredOn: "2026-06-23",
   bride: "Raina",
@@ -246,7 +253,7 @@ export const MONSOON_GARDEN_DEMO: DeliveredOrder = {
   },
   timeline: [
     { time: "4:00 PM", event: "Nikah Ceremony", description: "The sacred union witnessed by family and friends" },
-    { time: "6:30 PM", event: "Walima Reception", description: "The marriage feast, in keeping with the Sunnah" },
+    { time: "6:30 PM", event: "Wedding Reception", description: "The marriage feast, in keeping with the Sunnah" },
   ],
   rsvpWhatsApp: "918985798572",
   rsvp: { ...BASE_RSVP, deadline: "10th August 2026" },

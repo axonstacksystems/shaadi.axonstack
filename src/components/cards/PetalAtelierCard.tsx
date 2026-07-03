@@ -13,21 +13,26 @@ import { FamilyCard } from "./petal-atelier/FamilyCard";
 import { RSVPCard } from "./petal-atelier/RSVPCard";
 import { ActionBar } from "./petal-atelier/ActionBar";
 import { CoverScreen } from "./petal-atelier/CoverScreen";
+import { MusicPlayer } from "./petal-atelier/MusicPlayer";
 import { ThemeProvider, useTheme } from "./petal-atelier/ThemeContext";
 import { THEMES } from "./petal-atelier/themes";
 
 interface Props {
   order: DeliveredOrder;
   initialTheme?: string;
+  showToolbar?: boolean;
 }
 
-function PetalAtelierCardInner({ order }: Props) {
+function PetalAtelierCardInner({ order, showToolbar }: Props) {
   const { theme } = useTheme();
   const rsvpRef = useRef<HTMLDivElement>(null);
   const [showCover, setShowCover] = useState(true);
 
   function handleOpen() {
     setShowCover(false);
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    });
   }
 
   function scrollToRSVP() {
@@ -36,24 +41,25 @@ function PetalAtelierCardInner({ order }: Props) {
 
   const nikahEvent = {
     icon: "mosque" as const,
-    title: "Nikah Ceremony",
-    date: "15 December 2026",
-    time: "11:00 AM",
+    title: order.ceremonyHeadline,
+    date: order.primaryEvent.date,
+    time: order.primaryEvent.time,
     venue: order.primaryEvent.venue,
   };
 
+  const receptionItem = order.timeline?.find(t => t.event.toLowerCase().includes("reception"));
   const walimaEvent = {
     icon: "floral" as const,
-    title: "Walima Reception",
-    date: "16 December 2026",
-    time: "7:00 PM",
+    title: receptionItem?.event ?? "Wedding Reception",
+    date: order.primaryEvent.date,
+    time: receptionItem?.time ?? "7:00 PM",
     venue: order.primaryEvent.venue,
   };
 
   const groomFamily =
-    order.groomParents?.replace(/^Son of /, "") ?? `Mr. Abdul Rahman`;
+    order.groomParents?.replace(/^Son of /, "") ?? "";
   const brideFamily =
-    order.brideParents?.replace(/^Daughter of /, "") ?? `Mr. Ibrahim Kutty`;
+    order.brideParents?.replace(/^Daughter of /, "") ?? "";
 
   return (
     <div
@@ -77,6 +83,10 @@ function PetalAtelierCardInner({ order }: Props) {
             <CoverScreen
               groom={order.groom}
               bride={order.bride}
+              date={order.primaryEvent.date}
+              ceremonyHeadline={order.ceremonyHeadline}
+              rsvpWhatsApp={order.rsvpWhatsApp}
+              showToolbar={showToolbar}
               onOpen={handleOpen}
             />
           </motion.div>
@@ -140,7 +150,7 @@ function PetalAtelierCardInner({ order }: Props) {
         <EventCards nikah={nikahEvent} walima={walimaEvent} />
 
         {/* ── Timeline ───────────────────────────────────────── */}
-        <Timeline />
+        <Timeline steps={order.timeline?.map(t => t.event) ?? []} />
 
         {/* ── Venue ──────────────────────────────────────────── */}
         <VenueCard
@@ -195,6 +205,7 @@ function PetalAtelierCardInner({ order }: Props) {
           <RSVPCard
             groom={order.groom}
             bride={order.bride}
+            ceremonyHeadline={order.ceremonyHeadline}
             webhookUrl={order.rsvp?.webhookUrl}
             rsvpWhatsApp={order.rsvpWhatsApp}
             deadline={order.rsvp?.deadline}
@@ -272,20 +283,29 @@ function PetalAtelierCardInner({ order }: Props) {
         mapsUrl={order.primaryEvent.mapsUrl}
         groom={order.groom}
         bride={order.bride}
+        ceremonyHeadline={order.ceremonyHeadline}
         eventDateIso={order.eventDateIso}
         venue={order.primaryEvent.venue}
         venueAddress={order.primaryEvent.venueAddress}
         onRSVP={scrollToRSVP}
       />
       </motion.div>
+
+      {/* ── Background Music ──────────────────────────────────── */}
+      {!showCover && (
+        <MusicPlayer
+          audioUrl="/music/nasheed.mp3"
+          startPlaying
+        />
+      )}
     </div>
   );
 }
 
-export function PetalAtelierCard({ order, initialTheme }: Props) {
+export function PetalAtelierCard({ order, initialTheme, showToolbar = false }: Props) {
   return (
     <ThemeProvider themes={THEMES} initialThemeId={initialTheme ?? "ivory-blush"}>
-      <PetalAtelierCardInner order={order} />
+      <PetalAtelierCardInner order={order} showToolbar={showToolbar} />
     </ThemeProvider>
   );
 }

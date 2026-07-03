@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { X, CheckCircle } from "lucide-react";
 import { useTheme } from "./ThemeContext";
 
 interface RSVPCardProps {
   groom: string;
   bride: string;
+  ceremonyHeadline: string;
   webhookUrl?: string;
   rsvpWhatsApp: string;
   deadline?: string;
@@ -16,8 +17,7 @@ interface RSVPCardProps {
 interface RSVPModalProps {
   groom: string;
   bride: string;
-  webhookUrl?: string;
-  rsvpWhatsApp: string;
+  ceremonyHeadline: string;
   deadline?: string;
   onClose: () => void;
 }
@@ -25,41 +25,19 @@ interface RSVPModalProps {
 function RSVPModal({
   groom,
   bride,
-  webhookUrl,
-  rsvpWhatsApp,
+  ceremonyHeadline,
   deadline,
   onClose,
 }: RSVPModalProps) {
   const { theme } = useTheme();
   const [name, setName] = useState("");
   const [guests, setGuests] = useState(1);
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "success">("idle");
 
-  const yesMsg = encodeURIComponent(
-    `Alhamdulillah, I will attend the Nikah of ${groom} & ${bride}. Name: ${name}, Guests: ${guests}`
-  );
-
-  async function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name.trim()) return;
-
-    if (webhookUrl) {
-      setStatus("loading");
-      try {
-        await fetch(webhookUrl, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, guests, attending: true, timestamp: new Date().toISOString() }),
-        });
-        setStatus("success");
-      } catch {
-        setStatus("error");
-      }
-    } else {
-      window.open(`https://wa.me/${rsvpWhatsApp}?text=${yesMsg}`, "_blank");
-      onClose();
-    }
+    setStatus("success");
   }
 
   return (
@@ -67,12 +45,12 @@ function RSVPModal({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-end justify-center sm:items-center"
-      style={{ background: `${theme.mosqueTint}0.4)`, backdropFilter: "blur(8px)" }}
+      className="fixed inset-0 z-[200] flex items-end justify-center sm:items-center"
+      style={{ background: `${theme.mosqueTint}0.4)`, backdropFilter: "blur(8px)", paddingBottom: "80px" }}
       onClick={(e) => e.target === e.currentTarget && onClose()}
       role="dialog"
       aria-modal="true"
-      aria-label="RSVP form"
+      aria-label="Confirm presence form"
     >
       <motion.div
         initial={{ y: 60, opacity: 0 }}
@@ -91,13 +69,13 @@ function RSVPModal({
               fontWeight: 600,
             }}
           >
-            Confirm RSVP
+            Confirm Your Presence
           </h2>
           <button
             onClick={onClose}
             className="w-8 h-8 rounded-full flex items-center justify-center"
             style={{ background: `${theme.mosqueTint}0.08)` }}
-            aria-label="Close RSVP form"
+            aria-label="Close presence confirmation form"
           >
             <X size={16} style={{ color: theme.textLight }} />
           </button>
@@ -112,36 +90,26 @@ function RSVPModal({
               className="text-center py-6"
             >
               <CheckCircle size={48} style={{ color: theme.gold, margin: "0 auto 12px" }} />
-              <p style={{ color: theme.textDark, fontSize: 16, fontWeight: 600 }}>
-                JazakAllah Khair!
+              <p style={{ color: theme.textDark, fontSize: 18, fontWeight: 600, fontFamily: '"Cormorant Garamond", serif' }}>
+                JazakAllah Khair, {name}!
               </p>
-              <p style={{ color: theme.textLight, fontSize: 13, marginTop: 6 }}>
-                Your RSVP has been confirmed.
+              <p style={{ color: theme.textLight, fontSize: 13, marginTop: 8, lineHeight: 1.6 }}>
+                Your presence means the world to us.<br/>
+                We can't wait to celebrate this blessed day with you.
               </p>
-            </motion.div>
-          ) : status === "error" ? (
-            <motion.div
-              key="error"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-6"
-            >
-              <AlertCircle size={48} style={{ color: "#D8A9A2", margin: "0 auto 12px" }} />
-              <p style={{ color: theme.textDark, fontSize: 16, fontWeight: 600 }}>
-                Something went wrong
+              <p style={{ color: theme.gold, fontSize: 11, marginTop: 12, letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 500 }}>
+                With love and duas,
               </p>
-              <p style={{ color: theme.textLight, fontSize: 13, marginTop: 6 }}>
-                Please try via WhatsApp.
+              <p style={{ color: theme.textDark, fontSize: 13, marginTop: 2, fontFamily: '"Cormorant Garamond", serif', fontWeight: 600 }}>
+                The families of {groom} & {bride}
               </p>
-              <a
-                href={`https://wa.me/${rsvpWhatsApp}?text=${yesMsg}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-block rounded-full px-6 py-2.5 text-sm font-semibold text-white"
+              <button
+                onClick={onClose}
+                className="mt-6 rounded-full px-8 py-2.5 text-sm font-semibold text-white"
                 style={{ background: theme.buttonCircleBg }}
               >
-                Open WhatsApp
-              </a>
+                Close
+              </button>
             </motion.div>
           ) : (
             <motion.form
@@ -149,11 +117,6 @@ function RSVPModal({
               onSubmit={handleSubmit}
               className="space-y-4"
             >
-              {deadline && (
-                <p style={{ fontSize: 12, color: theme.textLight, textAlign: "center" }}>
-                  Please respond by <strong>{deadline}</strong>
-                </p>
-              )}
               <div>
                 <label
                   htmlFor="rsvp-name"
@@ -214,18 +177,11 @@ function RSVPModal({
               </div>
               <button
                 type="submit"
-                disabled={status === "loading" || !name.trim()}
+                disabled={!name.trim()}
                 className="w-full rounded-full py-3.5 font-semibold text-white text-sm flex items-center justify-center gap-2 transition-opacity disabled:opacity-60"
                 style={{ background: theme.buttonCircleBg }}
               >
-                {status === "loading" ? (
-                  <>
-                    <Loader2 size={16} className="animate-spin" />
-                    Confirming…
-                  </>
-                ) : (
-                  "Confirm RSVP"
-                )}
+                Confirm Your Presence
               </button>
             </motion.form>
           )}
@@ -238,6 +194,7 @@ function RSVPModal({
 export function RSVPCard({
   groom,
   bride,
+  ceremonyHeadline,
   webhookUrl,
   rsvpWhatsApp,
   deadline,
@@ -253,7 +210,7 @@ export function RSVPCard({
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
         className="px-4 pb-6"
-        aria-label="RSVP"
+        aria-label="Confirm your presence"
       >
         <div className="p-6 text-center" style={{
           background: `linear-gradient(135deg, ${theme.petalPrimary}CC, ${theme.petalSecondary}CC)`,
@@ -272,18 +229,13 @@ export function RSVPCard({
               color: theme.textDark,
             }}
           >
-            Kindly RSVP
+            Kindly Confirm Your Presence
           </p>
           <p
             className="mb-5 leading-relaxed"
             style={{ fontSize: "13px", color: theme.textLight }}
           >
             We would be honored by your presence and blessings.
-            {deadline && (
-              <>
-                {" "}Please confirm by <strong style={{ color: theme.textDark }}>{deadline}</strong>.
-              </>
-            )}
           </p>
           <button
             onClick={() => setShowModal(true)}
@@ -291,7 +243,7 @@ export function RSVPCard({
             style={{ background: theme.buttonCircleBg }}
             aria-haspopup="dialog"
           >
-            Confirm RSVP
+            Confirm Your Presence
           </button>
         </div>
       </motion.section>
@@ -301,8 +253,7 @@ export function RSVPCard({
           <RSVPModal
             groom={groom}
             bride={bride}
-            webhookUrl={webhookUrl}
-            rsvpWhatsApp={rsvpWhatsApp}
+            ceremonyHeadline={ceremonyHeadline}
             deadline={deadline}
             onClose={() => setShowModal(false)}
           />

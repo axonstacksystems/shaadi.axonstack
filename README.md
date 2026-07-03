@@ -3,7 +3,16 @@
 Public hosting for delivered **Shaadi Cards** — the digital wedding invitations
 crafted by [AxonStack](https://axonstack.in/apps/shaadi-cards).
 
-Each delivered client card is served at the root of the domain by slug:
+Each delivered client card is served at a permanent canonical URL:
+
+```
+https://shaadi.axonstack.in/i/<slug>
+```
+
+For example: <https://shaadi.axonstack.in/i/siyad-faleela>
+
+A short link is also permanently available and 308-redirects to the
+canonical URL:
 
 ```
 https://shaadi.axonstack.in/<slug>
@@ -21,25 +30,47 @@ repo at `/apps/shaadi-cards`.
 ```
 src/
 ├── app/
-│   ├── [slug]/page.tsx     # The delivered card route
-│   ├── layout.tsx          # Loads the invitation fonts + shared CSS
-│   ├── globals.css         # Tailwind + invitation theme tokens
-│   ├── page.tsx            # Landing fallback (redirects to marketing site)
+│   ├── [slug]/page.tsx              # Legacy short link → 308 redirect to /i/<slug>
+│   ├── i/[slug]/                    # Canonical order route
+│   │   ├── page.tsx                 # Renders the card
+│   │   └── opengraph-image.tsx      # Per-order OG image
+│   ├── designs/                     # Design gallery + previews
+│   ├── layout.tsx                   # Loads the invitation fonts + shared CSS
+│   ├── globals.css                  # Tailwind + invitation theme tokens
+│   ├── page.tsx                     # Landing page
 │   └── not-found.tsx
 ├── components/
 │   └── cards/
-│       └── MalabarEmeraldCard.tsx
+│       ├── shared/                   # Shared utilities (ThemeContext, og-image)
+│       ├── petal-atelier/            # Design sub-components
+│       └── PetalAtelierCard.tsx      # Card wrapper components
 └── data/
-    └── delivered-orders.ts # Source of truth for what's hosted here
+    ├── design-registry.ts           # Design + theme catalogue
+    ├── demo-orders.ts               # Demo orders for /designs/
+    └── delivered-orders.ts           # Real customer orders for /i/
 ```
 
 ## Adding a new delivered card
 
-1. Add an entry to `src/data/delivered-orders.ts` with a unique `slug`.
-2. If it uses an existing template (e.g. `malabar-emerald`), nothing else is
-   needed — the card route resolves the right component from `templateSlug`.
-3. If it uses a new template, add the component under `src/components/cards/`
-   and wire it into the switch in `src/app/[slug]/page.tsx`.
+1. Add an entry to `src/data/delivered-orders.ts` with a unique `slug`,
+   `designSlug`, and `themeSlug`:
+   ```ts
+   {
+     slug: "rahman-zaira",
+     designSlug: "petal-atelier",
+     themeSlug: "amethyst-silver",
+     title: "Rahman & Zaira",
+     // ... couple-specific fields
+   }
+   ```
+2. That's it. The canonical route `/i/rahman-zaira` is automatically
+   generated via `generateStaticParams()`. The OG image is automatically
+   generated from the order + theme data.
+3. The short link `shaadi.axonstack.in/rahman-zaira` will 308-redirect to
+   the canonical URL. Share either link — both work forever.
+4. If the couple chose a new design not yet in the registry, add the card
+   component under `src/components/cards/` and one entry to
+   `COMPONENT_MAP` in `src/app/i/[slug]/page.tsx`.
 
 ## Collecting RSVPs (Google Sheets)
 
@@ -85,7 +116,8 @@ npm install
 npm run dev
 ```
 
-Then open <http://localhost:3000/siyad-faleela>.
+Then open <http://localhost:3000/siyad-faleela> (redirects to canonical) or
+<http://localhost:3000/i/siyad-faleela>.
 
 ## Deploy
 

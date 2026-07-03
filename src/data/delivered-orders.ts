@@ -40,10 +40,13 @@ export interface RsvpConfig {
 }
 
 export interface DeliveredOrder {
-    /** URL slug — served at /<slug> on shaadi.axonstack.in */
+    /** URL slug — globally unique, served at /<slug> (308 redirect) and
+     * /i/<designSlug>/<themeSlug>/<slug> (canonical) on shaadi.axonstack.in */
     slug: string;
-    /** Template this card was built from */
-    templateSlug: string;
+    /** Which design this card was built from (e.g. "petal-atelier") */
+    designSlug: string;
+    /** Which theme the couple chose (e.g. "amethyst-silver") */
+    themeSlug: string;
     /** Public-facing customer / couple title */
     title: string; // e.g. "Siyad & Faleela"
     /** ISO date the order was delivered to the client */
@@ -74,7 +77,8 @@ export interface DeliveredOrder {
 export const deliveredOrders: DeliveredOrder[] = [
     {
         slug: "siyad-faleela",
-        templateSlug: "malabar-heritage",
+        designSlug: "malabar-heritage",
+        themeSlug: "emerald-gold",
         title: "Siyad & Faleela",
         deliveredOn: "2026-05-19",
         bride: "Faleela",
@@ -116,7 +120,8 @@ export const deliveredOrders: DeliveredOrder[] = [
     },
     {
         slug: "ashik-abiya",
-        templateSlug: "noor-e-nikah",
+        designSlug: "noor-e-nikah",
+        themeSlug: "navy-gold",
         title: "Ashik & Abia",
         deliveredOn: "2026-06-18",
         bride: "Abiya",
@@ -156,7 +161,8 @@ export const deliveredOrders: DeliveredOrder[] = [
     },
     {
         slug: "demo-celestial",
-        templateSlug: "celestial-canvas",
+        designSlug: "celestial-canvas",
+        themeSlug: "indigo-gold",
         title: "Demo & Celestial",
         deliveredOn: "2026-06-22",
         bride: "Celestial",
@@ -186,7 +192,7 @@ export const deliveredOrders: DeliveredOrder[] = [
             },
             {
                 time: "8:00 PM",
-                event: "Walima Reception",
+                event: "Wedding Reception",
                 description: "The marriage feast, in keeping with the Sunnah",
             },
         ],
@@ -199,7 +205,8 @@ export const deliveredOrders: DeliveredOrder[] = [
     },
     {
         slug: "demo-nordic",
-        templateSlug: "nordic-minimal",
+        designSlug: "nordic-minimal",
+        themeSlug: "frost-silver",
         title: "Nordic & Frost",
         deliveredOn: "2026-06-22",
         bride: "Frost",
@@ -229,7 +236,7 @@ export const deliveredOrders: DeliveredOrder[] = [
             },
             {
                 time: "5:00 PM",
-                event: "Walima Reception",
+                event: "Wedding Reception",
                 description: "The marriage feast, in keeping with the Sunnah",
             },
         ],
@@ -242,7 +249,8 @@ export const deliveredOrders: DeliveredOrder[] = [
     },
     {
         slug: "demo-mughal",
-        templateSlug: "mughal-miniature",
+        designSlug: "mughal-miniature",
+        themeSlug: "ruby-gold",
         title: "Mughal & Miniature",
         deliveredOn: "2026-06-22",
         bride: "Miniature",
@@ -279,7 +287,8 @@ export const deliveredOrders: DeliveredOrder[] = [
     },
     {
         slug: "demo-ivory-blush",
-        templateSlug: "petal-atelier",
+        designSlug: "petal-atelier",
+        themeSlug: "ivory-blush",
         title: "Muhammed Ashik & Abia Manal",
         deliveredOn: "2026-06-24",
         bride: "Abia Manal",
@@ -327,7 +336,7 @@ export const deliveredOrders: DeliveredOrder[] = [
             },
             {
                 time: "7:00 PM",
-                event: "Walima Reception",
+                event: "Wedding Reception",
                 description: "The marriage feast, in keeping with the Sunnah",
             },
         ],
@@ -340,7 +349,8 @@ export const deliveredOrders: DeliveredOrder[] = [
     },
     {
         slug: "demo-monsoon",
-        templateSlug: "monsoon-garden",
+        designSlug: "monsoon-garden",
+        themeSlug: "green-silver",
         title: "Rahman & Raina",
         deliveredOn: "2026-06-23",
         bride: "Raina",
@@ -375,7 +385,7 @@ export const deliveredOrders: DeliveredOrder[] = [
             },
             {
                 time: "6:30 PM",
-                event: "Walima Reception",
+                event: "Wedding Reception",
                 description: "The marriage feast, in keeping with the Sunnah",
             },
         ],
@@ -386,10 +396,86 @@ export const deliveredOrders: DeliveredOrder[] = [
             maxGuests: 5,
         },
     },
+    {
+        slug: "ashik-abia",
+        designSlug: "petal-atelier",
+        themeSlug: "crimson-maroon",
+        title: "Muhammed Ashik & Abia Manal",
+        deliveredOn: "2026-06-24",
+        bride: "Abia Manal",
+        groom: "Muhammed Ashik",
+        groomParents: "Son of Mr. Ashraf",
+        brideParents: "Daughter of Mr. Ismayil",
+        invitationLine:
+            "With the blessings of Allah and our beloved families, two hearts unite in the sacred bond of Nikah.",
+        ceremonyHeadline: "Nikah",
+        closingDuaArabic:
+            "بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
+        closingDua:
+            "May Allah bless you both, and shower His blessings upon you, and unite you in goodness.",
+        eventDateIso: "2026-07-19T10:00:00+05:30",
+        primaryEvent: {
+            label: "NIKAH CEREMONY",
+            date: "Sunday, 19th July 2026",
+            hijriDate: "24 Muharram 1448 AH",
+            time: "10:00 AM",
+            venue: "Signature Pavilion",
+            venueAddress: "Malappuram, Kerala",
+            mapsUrl:
+                "https://maps.app.goo.gl/96AF1YyuxcKLwgJ16?g_st=ic",
+        },
+        timeline: [
+            {
+                time: "10:00 AM",
+                event: "Guest Arrival",
+                description: "Guests are warmly welcomed",
+            },
+            {
+                time: "10:30 AM",
+                event: "Nikah Ceremony",
+                description: "The sacred union witnessed by family and friends",
+            },
+            {
+                time: "12:00 PM",
+                event: "Wedding Reception",
+                description: "The marriage feast, in keeping with the Sunnah",
+            },
+            {
+                time: "2:00 PM",
+                event: "Photos",
+                description: "Capturing beautiful moments together",
+            },
+        ],
+        rsvpWhatsApp: "918985798572",
+        rsvp: {
+            webhookUrl: "",
+            deadline: "10th July 2026",
+            maxGuests: 5,
+        },
+    },
 ];
+
+export function getDeliveredOrder(
+    designSlug: string,
+    themeSlug: string,
+    slug: string,
+): DeliveredOrder | undefined {
+    return deliveredOrders.find(
+        (o) =>
+            o.designSlug === designSlug &&
+            o.themeSlug === themeSlug &&
+            o.slug === slug,
+    );
+}
 
 export function getDeliveredOrderBySlug(
     slug: string,
 ): DeliveredOrder | undefined {
     return deliveredOrders.find((o) => o.slug === slug);
+}
+
+const _slugs = deliveredOrders.map((o) => o.slug);
+const _duplicates = _slugs.filter((s, i) => _slugs.indexOf(s) !== i);
+if (_duplicates.length) {
+    throw new Error(`Duplicate order slugs: ${_duplicates.join(", ")}`);
 }
