@@ -295,34 +295,33 @@ export function generateOrderOGImage(
           }}
         />
 
-        {/* Inner border frame */}
+        {/* Inner border frame — acts as the card edge */}
         <div
           style={{
             position: "absolute",
-            top: 24,
-            left: 24,
-            right: 24,
-            bottom: 24,
-            border: `1px solid ${goldColor}30`,
-            borderRadius: 16,
+            top: 28,
+            left: 28,
+            right: 28,
+            bottom: 28,
+            border: `2px solid ${goldColor}40`,
+            borderRadius: 20,
             display: "flex",
           }}
         />
 
-        {/* Glass card */}
+        {/* Content — fills the full rectangle */}
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            background: "rgba(255,255,255,0.55)",
-            border: `1.5px solid rgba(255,255,255,0.8)`,
-            borderRadius: 28,
-            padding: "48px 80px",
-            boxShadow: `0 16px 48px rgba(0,0,0,0.06)`,
+            width: 1200,
+            height: 630,
+            padding: "40px 60px",
             gap: 0,
-            maxWidth: 820,
+            position: "relative",
+            zIndex: 10,
           }}
         >
           {/* Bismillah */}
@@ -354,7 +353,7 @@ export function generateOrderOGImage(
           {/* Groom name */}
           <div
             style={{
-              fontSize: 64,
+              fontSize: 80,
               fontWeight: 600,
               color: textDark,
               letterSpacing: "-0.01em",
@@ -368,12 +367,12 @@ export function generateOrderOGImage(
           {/* Ampersand */}
           <div
             style={{
-              fontSize: 26,
+              fontSize: 32,
               fontWeight: 200,
               fontStyle: "italic",
               color: petalColor,
               letterSpacing: "0.18em",
-              margin: "6px 0",
+              margin: "8px 0",
               display: "flex",
             }}
           >
@@ -383,7 +382,7 @@ export function generateOrderOGImage(
           {/* Bride name */}
           <div
             style={{
-              fontSize: 64,
+              fontSize: 80,
               fontWeight: 600,
               color: textDark,
               letterSpacing: "-0.01em",
@@ -404,11 +403,11 @@ export function generateOrderOGImage(
               marginBottom: 14,
             }}
           >
-            <div style={{ width: 50, height: 1, background: `linear-gradient(to right, transparent, ${goldColor})`, display: "flex" }} />
-            <div style={{ width: 6, height: 6, background: goldColor, transform: "rotate(45deg)", display: "flex" }} />
-            <div style={{ width: 4, height: 4, background: goldColor, borderRadius: "50%", display: "flex" }} />
-            <div style={{ width: 6, height: 6, background: goldColor, transform: "rotate(45deg)", display: "flex" }} />
-            <div style={{ width: 50, height: 1, background: `linear-gradient(to left, transparent, ${goldColor})`, display: "flex" }} />
+            <div style={{ width: 70, height: 1, background: `linear-gradient(to right, transparent, ${goldColor})`, display: "flex" }} />
+            <div style={{ width: 8, height: 8, background: goldColor, transform: "rotate(45deg)", display: "flex" }} />
+            <div style={{ width: 5, height: 5, background: goldColor, borderRadius: "50%", display: "flex" }} />
+            <div style={{ width: 8, height: 8, background: goldColor, transform: "rotate(45deg)", display: "flex" }} />
+            <div style={{ width: 70, height: 1, background: `linear-gradient(to left, transparent, ${goldColor})`, display: "flex" }} />
           </div>
 
           {/* Invitation copy */}
