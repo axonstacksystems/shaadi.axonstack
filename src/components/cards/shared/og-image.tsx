@@ -360,7 +360,7 @@ export function generateOrderOGImage(
               display: "flex",
             }}
           >
-            {order.groom}
+            {order.groomShort ?? order.groom}
           </div>
 
           {/* Ampersand */}
@@ -390,7 +390,7 @@ export function generateOrderOGImage(
               marginBottom: 24,
             }}
           >
-            {order.bride}
+            {order.brideShort ?? order.bride}
           </div>
 
           {/* Ornament — double diamond with center dot */}

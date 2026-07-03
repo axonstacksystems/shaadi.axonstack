@@ -3,12 +3,16 @@ import {
   OG_SIZE,
   OG_CONTENT_TYPE,
 } from "@/components/cards/shared/og-image";
-import { getDeliveredOrderBySlug } from "@/data/delivered-orders";
+import { getDeliveredOrderBySlug, deliveredOrders } from "@/data/delivered-orders";
 import { getDesign, getDesignTheme } from "@/data/design-registry";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
+
+export function generateStaticParams() {
+  return deliveredOrders.map((o) => ({ slug: o.slug }));
+}
 
 type Props = {
   params: Promise<{ slug: string }>;

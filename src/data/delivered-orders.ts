@@ -54,6 +54,9 @@ export interface DeliveredOrder {
     /** Couple-specific copy */
     bride: string;
     groom: string;
+    /** Short first-name-only versions for OG previews and compact UI */
+    groomShort?: string;
+    brideShort?: string;
     /** Optional host/parent lines. Muslim invitations are traditionally
      * issued by the families, so these appear under each name when set,
      * e.g. "Son of Mr. & Mrs. Abdul Rahman". */
@@ -404,6 +407,8 @@ export const deliveredOrders: DeliveredOrder[] = [
         deliveredOn: "2026-06-24",
         bride: "Abia Manal",
         groom: "Muhammed Ashik",
+        groomShort: "Ashik",
+        brideShort: "Abia",
         groomParents: "Son of Mr. Ashraf",
         brideParents: "Daughter of Mr. Ismayil",
         invitationLine:
