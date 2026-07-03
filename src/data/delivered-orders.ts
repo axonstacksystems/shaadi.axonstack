@@ -74,7 +74,7 @@ export interface DeliveredOrder {
 export const deliveredOrders: DeliveredOrder[] = [
     {
         slug: "siyad-faleela",
-        templateSlug: "malabar-emerald",
+        templateSlug: "malabar-heritage",
         title: "Siyad & Faleela",
         deliveredOn: "2026-05-19",
         bride: "Faleela",
@@ -199,7 +199,7 @@ export const deliveredOrders: DeliveredOrder[] = [
     },
     {
         slug: "demo-nordic",
-        templateSlug: "nordic-frost",
+        templateSlug: "nordic-minimal",
         title: "Nordic & Frost",
         deliveredOn: "2026-06-22",
         bride: "Frost",
@@ -279,7 +279,7 @@ export const deliveredOrders: DeliveredOrder[] = [
     },
     {
         slug: "demo-ivory-blush",
-        templateSlug: "ivory-blush",
+        templateSlug: "petal-atelier",
         title: "Muhammed Ashik & Abia Manal",
         deliveredOn: "2026-06-24",
         bride: "Abia Manal",
@@ -340,7 +340,7 @@ export const deliveredOrders: DeliveredOrder[] = [
     },
     {
         slug: "demo-monsoon",
-        templateSlug: "monsoon-special",
+        templateSlug: "monsoon-garden",
         title: "Rahman & Raina",
         deliveredOn: "2026-06-23",
         bride: "Raina",

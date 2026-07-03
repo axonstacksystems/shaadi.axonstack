@@ -4,13 +4,13 @@ import {
   deliveredOrders,
   getDeliveredOrderBySlug,
 } from "@/data/delivered-orders";
-import { MalabarEmeraldCard } from "@/components/cards/MalabarEmeraldCard";
+import { MalabarHeritageCard } from "@/components/cards/MalabarHeritageCard";
 import { NoorENikahCard } from "@/components/cards/NoorENikahCard";
 import { CelestialCanvasCard } from "@/components/cards/CelestialCanvasCard";
-import { NordicFrostCard } from "@/components/cards/NordicFrostCard";
+import { NordicMinimalCard } from "@/components/cards/NordicMinimalCard";
 import { MughalMiniatureCard } from "@/components/cards/MughalMiniatureCard";
-import { MonsoonSpecialCard } from "@/components/cards/MonsoonSpecialCard";
-import { IvoryBlushCard } from "@/components/cards/IvoryBlushCard";
+import { MonsoonGardenCard } from "@/components/cards/MonsoonGardenCard";
+import { PetalAtelierCard } from "@/components/cards/PetalAtelierCard";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -58,20 +58,20 @@ export default async function DeliveredCardPage({ params }: Props) {
   if (!order) notFound();
 
   switch (order.templateSlug) {
-    case "malabar-emerald":
-      return <MalabarEmeraldCard order={order} />;
+    case "malabar-heritage":
+      return <MalabarHeritageCard order={order} />;
     case "noor-e-nikah":
       return <NoorENikahCard order={order} />;
     case "celestial-canvas":
       return <CelestialCanvasCard order={order} />;
-    case "nordic-frost":
-      return <NordicFrostCard order={order} />;
+    case "nordic-minimal":
+      return <NordicMinimalCard order={order} />;
     case "mughal-miniature":
       return <MughalMiniatureCard order={order} />;
-    case "monsoon-special":
-      return <MonsoonSpecialCard order={order} />;
-    case "ivory-blush":
-      return <IvoryBlushCard order={order} />;
+    case "monsoon-garden":
+      return <MonsoonGardenCard order={order} />;
+    case "petal-atelier":
+      return <PetalAtelierCard order={order} />;
     default:
       notFound();
   }

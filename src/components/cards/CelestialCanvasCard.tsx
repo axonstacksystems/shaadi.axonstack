@@ -7,10 +7,10 @@ import { RsvpForm } from "@/components/rsvp/RsvpForm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Khatam } from "@/components/cards/shared/Khatam";
-import { Nebula } from "@/components/cards/celestial/Nebula";
-import { OrbitProgress } from "@/components/cards/celestial/OrbitProgress";
-import { OrbitalUnion } from "@/components/cards/celestial/OrbitalUnion";
-import { ConstellationTimeline } from "@/components/cards/celestial/ConstellationTimeline";
+import { Nebula } from "@/components/cards/celestial-canvas/Nebula";
+import { OrbitProgress } from "@/components/cards/celestial-canvas/OrbitProgress";
+import { OrbitalUnion } from "@/components/cards/celestial-canvas/OrbitalUnion";
+import { ConstellationTimeline } from "@/components/cards/celestial-canvas/ConstellationTimeline";
 
 interface Props {
   order: DeliveredOrder;

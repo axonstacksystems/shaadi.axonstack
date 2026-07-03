@@ -23,109 +23,11 @@ import { BottomNav } from "@/components/home/BottomNav";
 import { AppHeader } from "@/components/home/AppHeader";
 import { cn } from "@/lib/utils";
 
-export type TemplateInfo = {
-  slug: string;
-  name: string;
-  tagline: string;
-  description: string;
-  /** gradient stops for the preview tile */
-  accent: string;
-  /** swatch hexes shown as palette dots */
-  palette: string[];
-  /** the hero "signature effect" of the template */
-  signature: string;
-  /** short feature tags */
-  tags: string[];
-  /** whether the preview tile uses light or dark text */
-  tone: "light" | "dark";
-};
+import { DESIGNS, type DesignEntry } from "@/data/design-registry";
 
-export const templates: TemplateInfo[] = [
-  {
-    slug: "malabar-emerald",
-    name: "Malabar Emerald",
-    tagline: "Kerala heritage",
-    description:
-      "Emerald and gold elegance rooted in Malabar tradition — timeless, regal, and warm.",
-    accent: "from-[#0a3d30] via-[#0f5e4a] to-[#d4af37]",
-    palette: ["#0f5e4a", "#1a8b6a", "#d4af37", "#faf8f3"],
-    signature: "Glass countdown",
-    tags: ["Emerald & Gold", "Glassmorphism", "Live RSVP"],
-    tone: "light",
-  },
-  {
-    slug: "noor-e-nikah",
-    name: "Noor-e-Nikah",
-    tagline: "Sacred & serene",
-    description:
-      "Luminous Islamic motifs with graceful Arabic calligraphy framed by gold filigree.",
-    accent: "from-[#152a45] via-[#2c5f7a] to-[#c9a227]",
-    palette: ["#1e3a5f", "#2c5f7a", "#c9a227", "#faf8f3"],
-    signature: "Mihrab arch reveal",
-    tags: ["Calligraphy", "Khatam Star", "Filigree"],
-    tone: "dark",
-  },
-  {
-    slug: "celestial-canvas",
-    name: "Celestial Canvas",
-    tagline: "Deep-space awe",
-    description:
-      "Names written in star constellations over a living, twinkling starfield.",
-    accent: "from-[#050508] via-[#1a0a2e] to-[#0d1b2a]",
-    palette: ["#050508", "#1a0a2e", "#0d1b2a", "#f4e4b8"],
-    signature: "Shooting-star reveal",
-    tags: ["Starfield", "Parallax", "Constellation"],
-    tone: "dark",
-  },
-  {
-    slug: "nordic-frost",
-    name: "Nordic Frost",
-    tagline: "Scandinavian winter",
-    description:
-      "Crisp, minimal frost aesthetics with quiet warmth and gently falling snow.",
-    accent: "from-[#e8f0f5] via-[#bcd4e6] to-[#6f97b8]",
-    palette: ["#e8f0f5", "#bcd4e6", "#8fb3cc", "#1e3a5f"],
-    signature: "Falling-snow drift",
-    tags: ["Minimal", "Frost Glass", "Snowfall"],
-    tone: "light",
-  },
-  {
-    slug: "mughal-miniature",
-    name: "Mughal Miniature",
-    tagline: "Royal grandeur",
-    description:
-      "Dense jewel-tone ornamentation and gold filigree borders from miniature painting.",
-    accent: "from-[#8b1a2d] via-[#c9a227] to-[#1e3a5f]",
-    palette: ["#8b1a2d", "#c9a227", "#1e3a5f", "#f5e6d3"],
-    signature: "Filigree border draw",
-    tags: ["Jewel Tones", "Ornate", "Heritage"],
-    tone: "dark",
-  },
-  {
-    slug: "monsoon-special",
-    name: "Monsoon Special",
-    tagline: "Lush & blooming",
-    description:
-      "A rain-blessed, verdant theme where two hearts bloom together with the season.",
-    accent: "from-[#1b4332] via-[#2d6a4f] to-[#74c69d]",
-    palette: ["#1b4332", "#2d6a4f", "#74c69d", "#f0fff4"],
-    signature: "Monsoon rainfall",
-    tags: ["Botanical", "Rainfall", "Verdant"],
-    tone: "dark",
-  },
-  {
-    slug: "ivory-blush",
-    name: "Ivory Blush",
-    tagline: "Apple-luxury elegance",
-    description:
-      "Champagne ivory and blush rose glassmorphism — an editorial Islamic invitation with drifting petals and live countdown.",
-    accent: "from-[#F7F3EE] via-[#E8C6C1] to-[#D9B67A]",
-    palette: ["#FBF8F4", "#E8C6C1", "#D9B67A", "#4B3A2A"],
-    signature: "Floating rose petals",
-    tags: ["Glassmorphism", "Blush Rose", "Champagne Gold"],
-    tone: "light",
-  },
-];
+export type TemplateInfo = DesignEntry;
+
+export const templates: TemplateInfo[] = DESIGNS;
 
 const stats = [
   { value: "7", label: "Unique designs" },
@@ -226,6 +128,7 @@ export function TemplatesGallery() {
       >
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-3">
           {templates.map((tpl) => (
+            // Use first theme's palette for gallery swatches
             <motion.div
               key={tpl.slug}
               variants={item}
@@ -282,7 +185,7 @@ export function TemplatesGallery() {
                   <div className="flex items-center gap-2">
                     <Palette className="size-4 text-[#b8941f]" />
                     <div className="flex gap-1.5">
-                      {tpl.palette.map((hex) => (
+                      {tpl.themes[0].palette.map((hex) => (
                         <span
                           key={hex}
                           className="size-3.5 rounded-full ring-1 ring-black/10"

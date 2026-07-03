@@ -348,7 +348,7 @@ export function HomeLanding() {
                       <div className="mb-3 flex items-center gap-2">
                         <Palette className="size-4 text-[#b8941f]" />
                         <div className="flex gap-1.5">
-                          {tpl.palette.map((hex) => (
+                          {tpl.themes[0].palette.map((hex) => (
                             <span
                               key={hex}
                               className="size-3.5 rounded-full ring-1 ring-black/10"
