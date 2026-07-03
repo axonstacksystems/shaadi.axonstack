@@ -415,7 +415,7 @@ export const deliveredOrders: DeliveredOrder[] = [
         groomParents: "Son of Mr. Ashraf",
         brideParents: "Daughter of Mr. Ismayil",
         invitationLine:
-            "With the blessings of Allah and our beloved families, two hearts unite in the sacred bond of Nikah.",
+            "With the blessings of Allah and our beloved families, we unite in the sacred bond of Nikah.",
         ceremonyHeadline: "Nikah",
         closingDuaArabic:
             "بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",

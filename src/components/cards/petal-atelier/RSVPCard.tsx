@@ -101,7 +101,7 @@ function RSVPModal({
                 With love and duas,
               </p>
               <p style={{ color: theme.textDark, fontSize: 13, marginTop: 2, fontFamily: '"Cormorant Garamond", serif', fontWeight: 600 }}>
-                The families of {groom} & {bride}
+                {groom} & {bride}
               </p>
               <button
                 onClick={onClose}

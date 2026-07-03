@@ -369,12 +369,14 @@ export function CoverScreen({ groom, bride, date, ceremonyHeadline, rsvpWhatsApp
       const deltaT = Date.now() - startTime;
       // Swipe up (negative deltaY = finger moved up) with threshold
       if (deltaY > 50 && deltaT < 800) {
+        console.log("[CoverScreen] swipe up detected, opening invitation");
         onOpen();
       }
     }
 
     function onWheel(e: WheelEvent) {
       if (e.deltaY > 30) {
+        console.log("[CoverScreen] scroll down detected, opening invitation");
         onOpen();
       }
     }
@@ -578,9 +580,9 @@ export function CoverScreen({ groom, bride, date, ceremonyHeadline, rsvpWhatsApp
               lineHeight:1.65,
             }}
           >
-            Together with their families,<br/>
+            Together with our families,<br/>
             request the honor of your presence<br/>
-            at their <strong style={{ fontStyle:"normal", color:theme.textDark }}>{ceremonyHeadline}</strong>
+            at our <strong style={{ fontStyle:"normal", color:theme.textDark }}>{ceremonyHeadline}</strong>
           </motion.p>
 
           {/* Date — slim, tracking caps, gold */}

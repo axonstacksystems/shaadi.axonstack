@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import type { DeliveredOrder } from "@/data/delivered-orders";
 import { FloatingPetals } from "./petal-atelier/FloatingPetals";
@@ -29,15 +29,33 @@ function PetalAtelierCardInner({ order, showToolbar }: Props) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [showCover, setShowCover] = useState(true);
 
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.remove();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
   function handleOpen() {
     // Create and start audio within the user gesture to satisfy autoplay policies
     if (!audioRef.current) {
-      const audio = new Audio("/music/nasheed.mp3");
+      const audio = document.createElement("audio");
+      audio.src = "/music/nasheed.mp3";
       audio.loop = true;
       audio.volume = 0.4;
+      audio.preload = "auto";
+      audio.style.display = "none";
+      document.body.appendChild(audio);
       audioRef.current = audio;
     }
-    audioRef.current.play().catch(() => {});
+    const audio = audioRef.current;
+    audio
+      .play()
+      .then(() => console.log("[PetalAtelier] music started"))
+      .catch((err) => console.warn("[PetalAtelier] autoplay blocked:", err?.name, err?.message));
 
     setShowCover(false);
     requestAnimationFrame(() => {
@@ -264,7 +282,7 @@ function PetalAtelierCardInner({ order, showToolbar }: Props) {
                 color: theme.textDark,
               }}
             >
-              The families of {order.groom} &amp; {order.bride}
+              {order.groom} &amp; {order.bride}
             </p>
           </div>
         </motion.section>
