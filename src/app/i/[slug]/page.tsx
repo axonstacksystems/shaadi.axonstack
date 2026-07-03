@@ -38,7 +38,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const url = `https://shaadi.axonstack.in/i/${slug}`;
   const title = `${order.title} — Wedding Invitation`;
-  const description = `${order.invitationLine}. You're invited to ${order.groom} & ${order.bride}'s ${order.ceremonyHeadline} on ${order.primaryEvent.date} at ${order.primaryEvent.venue}.`;
+  const description = `${order.invitationLine} You're invited to our ${order.ceremonyHeadline} on ${order.primaryEvent.date} at ${order.primaryEvent.venue}.`;
+
   const imageUrl = order.previewImage
     ? `${order.previewImage}`
     : `${url}/opengraph-image`;
