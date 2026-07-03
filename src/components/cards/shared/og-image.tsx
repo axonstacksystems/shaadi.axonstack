@@ -99,15 +99,16 @@ export function generateOGImage(
         >
           <div
             style={{
-              fontSize: 28,
+              fontSize: 22,
               color: goldColor,
               letterSpacing: "0.08em",
               marginBottom: 12,
               opacity: 0.75,
               display: "flex",
+              fontStyle: "italic",
             }}
           >
-            ﷽
+            Bismillah ir-Rahman ir-Rahim
           </div>
           <div
             style={{
@@ -327,15 +328,16 @@ export function generateOrderOGImage(
           {/* Bismillah */}
           <div
             style={{
-              fontSize: 30,
+              fontSize: 22,
               color: goldColor,
-              letterSpacing: "0.06em",
+              letterSpacing: "0.08em",
               opacity: 0.65,
               display: "flex",
               marginBottom: 6,
+              fontStyle: "italic",
             }}
           >
-            ﷽
+            Bismillah ir-Rahman ir-Rahim
           </div>
 
           {/* Gold hairline separator */}
@@ -423,9 +425,9 @@ export function generateOrderOGImage(
               alignItems: "center",
             }}
           >
-            <div>Together with their families,</div>
-            <div>request the honor of your presence</div>
-            <div>
+            <div style={{ display: "flex" }}>Together with their families,</div>
+            <div style={{ display: "flex" }}>request the honor of your presence</div>
+            <div style={{ display: "flex" }}>
               at their{" "}
               <span style={{ fontStyle: "normal", fontWeight: 600, color: textDark, opacity: 1 }}>
                 {order.ceremonyHeadline}
