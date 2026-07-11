@@ -461,6 +461,66 @@ export const deliveredOrders: DeliveredOrder[] = [
             maxGuests: 5,
         },
     },
+    {
+        slug: "abia-ashik",
+        designSlug: "petal-atelier",
+        themeSlug: "crimson-maroon",
+        title: "Abia Manal & Muhammed Ashik",
+        deliveredOn: "2026-06-24",
+        bride: "Muhammed Ashik",
+        groom: "Abia Manal",
+        groomShort: "Abia",
+        brideShort: "Ashik",
+        previewImage: "/og/abia-ashik.png",
+        groomParents: "Daughter of Mr. Ismayil",
+        brideParents: "Son of Mr. Ashraf",
+        invitationLine:
+            "With the blessings of Allah and our beloved families, we unite in the sacred bond of Nikah.",
+        ceremonyHeadline: "Nikah",
+        closingDuaArabic:
+            "بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
+        closingDua:
+            "May Allah bless you both, and shower His blessings upon you, and unite you in goodness.",
+        eventDateIso: "2026-07-19T10:00:00+05:30",
+        primaryEvent: {
+            label: "NIKAH CEREMONY",
+            date: "Sunday, 19th July 2026",
+            hijriDate: "24 Muharram 1448 AH",
+            time: "10:00 AM",
+            venue: "Signature Pavilion",
+            venueAddress: "Malappuram, Kerala",
+            mapsUrl:
+                "https://maps.app.goo.gl/96AF1YyuxcKLwgJ16?g_st=ic",
+        },
+        timeline: [
+            {
+                time: "09:30 AM",
+                event: "Guest Arrival",
+                description: "Guests are warmly welcomed",
+            },
+            {
+                time: "10:00 AM",
+                event: "Nikah Ceremony",
+                description: "The sacred union witnessed by family and friends",
+            },
+            {
+                time: "11:00 AM",
+                event: "Wedding Reception",
+                description: "The marriage feast, in keeping with the Sunnah",
+            },
+            {
+                time: "2:00 PM",
+                event: "Photos",
+                description: "Capturing beautiful moments together",
+            },
+        ],
+        rsvpWhatsApp: "918985798572",
+        rsvp: {
+            webhookUrl: "",
+            deadline: "10th July 2026",
+            maxGuests: 5,
+        },
+    },
 ];
 
 export function getDeliveredOrder(
